@@ -10,6 +10,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,20 +50,23 @@ public class Main {
                 "01.01.2017", department);
 
         final Session session = factory.openSession();
+//        department.setEmployeeList(List.of(employee, employee1));
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             //do some work
             session.save(employee);
             session.save(employee1);
-            session.save(department);
+            final Serializable save = session.save(department);
             tx.commit();
+            final Department department1 = session.get(Department.class, save);
+            System.out.println(save);
+            System.out.println(department1);
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             throw e;
         } finally {
             session.close();
         }
-
     }
 }

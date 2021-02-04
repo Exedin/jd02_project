@@ -18,4 +18,5 @@ public class EmployeeFullName {
     String Surname;
     @Column(name = "E_MIDDLE_NAME")
     String middleName;
+
 }

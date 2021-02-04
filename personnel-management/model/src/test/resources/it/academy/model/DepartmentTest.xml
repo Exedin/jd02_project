@@ -1,0 +1,33 @@
+<dataset>
+    <T_DEP D_ID="4028e49e776ea47d01776ea47f770001"
+           D_FORMATION_DATE="01.09.2008"
+           D_DESC="Detapment for test"
+           D_NAME="test1"
+           D_PHONE="8017-2421906"/>
+    <T_DEP D_ID="4028e49e776ea47d01776ea47f770002"
+           D_FORMATION_DATE="01.09.2007"
+           D_DESC="Detapment for test2"
+           D_NAME="test2"
+           D_PHONE="8017-2434547"/>
+
+    <T_EMP E_ID="4028e49e776ea47d01776ea47f6c0000"
+           E_BIRTH_DATE="26.05.1988"
+           E_EMPLOYMENT_DATE="01.01.2017"
+           E_MAIL="test@gmail.com"
+           E_SURNAME="Trukhanovich"
+           E_MIDDLE_NAME="Vladimirovich"
+           E_NAME="Andrei"
+           E_PHONE="375295592527"
+           E_POSITION="engeneer"
+           D_ID="4028e49e776ea47d01776ea47f770001"/>
+    <T_EMP E_ID="4028e49e776ea47d01776ea47f6c0001"
+           E_BIRTH_DATE="26.05.1993"
+           E_EMPLOYMENT_DATE="01.01.2017"
+           E_MAIL="test@gmail.com"
+           E_SURNAME="Siardzechnaja"
+           E_MIDDLE_NAME="Vladimirovna"
+           E_NAME="Luybov"
+           E_PHONE="375291259387"
+           E_POSITION="salsforce"
+           D_ID="4028e49e776ea47d01776ea47f770001"/>
+</dataset>

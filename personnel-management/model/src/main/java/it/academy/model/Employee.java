@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_EMPLOYEE")
+@Table(name = "T_EMP")
 @Entity
 public class Employee{
 
@@ -43,6 +43,18 @@ public class Employee{
     @JoinColumn(name ="D_ID" )
     Department department;
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", fullName=" + fullName +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", position='" + position + '\'' +
+                ", dateOfEmployment='" + dateOfEmployment + '\'' +
+                '}';
+    }
 }
 
 
