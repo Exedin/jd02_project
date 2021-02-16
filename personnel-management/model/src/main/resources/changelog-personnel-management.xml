@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="truknavocih">
+        <sql>
+                create database if not exists personnel_management;
+                create table if not exists personnel_management.T_DEP (
+            D_ID varchar(255) not null,
+            D_FORMATION_DATE varchar(255),
+            D_DESC varchar(255),
+            D_NAME varchar(255),
+            D_PHONE varchar(255),
+            primary key (D_ID));
+                create table if not exists personnel_management.T_EMP (E_ID varchar(255) not null,
+            E_BIRTH_DATE varchar(255),
+            E_EMPLOYMENT_DATE varchar(255),
+            E_MAIL varchar(255),
+            E_SURNAME varchar(255),
+            E_MIDDLE_NAME varchar(255),
+            E_NAME varchar(255),
+            E_PHONE varchar(255),
+            E_POSITION varchar(255),
+            D_ID varchar(255),
+            primary key (E_ID));
+            alter table personnel_management.T_EMP add constraint FK3a9upsahvnwktgkba9x6qs204 foreign key (D_ID) references personnel_management.T_DEP (D_ID);
+        </sql>
+    </changeSet>
+    <changeSet id="2" author="truknavocih">
+        <sql>
+            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.09.2008', 'Departmen for desing building', 'Civil engeniring', '+375172421906', '4028e49e776ea47d01776ea47f123001');
+            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.08.2008', 'Department for accounting and finance', 'bookkeeping', '+375172434547', '4028e49e776ea47d01776ea47f123002');
+            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.01.2010', 'Department for HR', 'HR', '+375172434546', '4028e49e776ea47d01776ea47f123003');
+
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="truknavocih">
+        <sql>
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('26.05.1988', '01.09.2008', '4028e49e776ea47d01776ea47f123001', 'a.trukhanovich@mail.com', 'Trukhanovich', 'Vladimirovich', 'Andrei', '+375295592527', 'Main engeneer', '4028e49e776ea47d01776ea47f6c0001');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('20.03.1986', '01.09.2008', '4028e49e776ea47d01776ea47f123001', 'm.belkoh@mail.com', 'Belco', 'Olegovich', 'Maksim', '+375291233225', 'Engeneer', '4028e49e776ea47d01776ea47f6c0002');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('25.06.1992', '01.08.2008', '4028e49e776ea47d01776ea47f123002', 'l.siardzechnaya@mail.com', 'Siardzechnaya', 'Vladimirovna', 'Luybov', '+375291529378', 'Accountant', '4028e49e776ea47d01776ea47f6c0003');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('12.03.1990', '01.08.2008', '4028e49e776ea47d01776ea47f123002', 'p.petrov@mail.com', 'Petrov', 'Olegivich', 'Petr', '+375293256558', 'trainee', '4028e49e776ea47d01776ea47f6c0004');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('07.11.1985', '01.08.2008', '4028e49e776ea47d01776ea47f123002', 'n.dan@mail.com', 'Danolov', 'Markovich', 'Nikolay', '+375296982535', 'trainee', '4028e49e776ea47d01776ea47f6c0005');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('01.12.1993', '01.10.2010', '4028e49e776ea47d01776ea47f123003', 'a.mary@mail.com', 'Maryanova', 'Dmitrievna', 'Olga', '+375296595857', 'HR', '4028e49e776ea47d01776ea47f6c0006');
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
