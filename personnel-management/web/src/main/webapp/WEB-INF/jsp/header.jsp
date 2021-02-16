@@ -26,7 +26,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/web/department/getAll">Get all department</a></li>
-              <li><a class="dropdown-item" href="#">Get one department</a></li>
+              <li><a class="dropdown-item" href="/web/department/getOne">Get one department</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Create department</a></li>
               <li><a class="dropdown-item" href="#">Delete department</a></li>
