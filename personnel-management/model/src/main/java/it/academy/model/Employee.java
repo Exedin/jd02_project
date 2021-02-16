@@ -1,6 +1,7 @@
 package it.academy.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "T_EMP")
 @Entity
+@Builder
 public class Employee{
 
     @Id

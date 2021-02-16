@@ -30,7 +30,7 @@
     </changeSet>
     <changeSet id="2" author="truknavocih">
         <sql>
-            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.09.2008', 'Departmen for desing building', 'Civil engeniring', '+375172421906', '4028e49e776ea47d01776ea47f123001');
+            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.09.2008', 'Department for desing building', 'Civil engeniring', '+375172421906', '4028e49e776ea47d01776ea47f123001');
             insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.08.2008', 'Department for accounting and finance', 'bookkeeping', '+375172434547', '4028e49e776ea47d01776ea47f123002');
             insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.01.2010', 'Department for HR', 'HR', '+375172434546', '4028e49e776ea47d01776ea47f123003');
 
