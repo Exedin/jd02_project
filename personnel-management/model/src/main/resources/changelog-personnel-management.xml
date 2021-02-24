@@ -31,7 +31,7 @@
     <changeSet id="2" author="truknavocih">
         <sql>
             insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.09.2008', 'Department for desing building', 'Civil engeniring', '+375172421906', '4028e49e776ea47d01776ea47f123001');
-            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.08.2008', 'Department for accounting and finance', 'bookkeeping', '+375172434547', '4028e49e776ea47d01776ea47f123002');
+            insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.08.2008', 'Department for accounting and finance', 'Bookkeeping', '+375172434547', '4028e49e776ea47d01776ea47f123002');
             insert into personnel_management.T_DEP (D_FORMATION_DATE, D_DESC, D_NAME, D_PHONE, D_ID) values ('01.01.2010', 'Department for HR', 'HR', '+375172434546', '4028e49e776ea47d01776ea47f123003');
 
         </sql>
@@ -50,6 +50,8 @@
             values ('07.11.1985', '01.08.2008', '4028e49e776ea47d01776ea47f123002', 'n.dan@mail.com', 'Danolov', 'Markovich', 'Nikolay', '+375296982535', 'trainee', '4028e49e776ea47d01776ea47f6c0005');
             insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, D_ID, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
             values ('01.12.1993', '01.10.2010', '4028e49e776ea47d01776ea47f123003', 'a.mary@mail.com', 'Maryanova', 'Dmitrievna', 'Olga', '+375296595857', 'HR', '4028e49e776ea47d01776ea47f6c0006');
+            insert into T_EMP (E_BIRTH_DATE, E_EMPLOYMENT_DATE, E_MAIL, E_SURNAME, E_MIDDLE_NAME, E_NAME, E_PHONE, E_POSITION, E_ID)
+            values ('12.05.1988', '25.10.2020', 'a.mary@mail.com', 'Ivanova', 'Andreeevna', 'Marya', '+375295655599', 'salesman', '4028e49e776ea47d01776ea47f6c0007');
         </sql>
     </changeSet>
 
