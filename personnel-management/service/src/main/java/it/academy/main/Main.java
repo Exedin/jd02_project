@@ -5,6 +5,7 @@ import it.academy.dao.DepartmentDaoImpl;
 import it.academy.dao.EmployeeDaoImpl;
 import it.academy.model.Department;
 import it.academy.model.Employee;
+import it.academy.model.EmployeeFullName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,8 +30,24 @@ public class Main {
 //        System.out.println(allDepartment);
 
         EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
+
+
+        Employee employee=new Employee();
+        EmployeeFullName employeeFullName=
+                new EmployeeFullName("TestName", "TestSurname", "TestMiddle");
+        employee.setFullName(employeeFullName);
+//        String save = employeeDaoImpl.save(employee);
+
         List<Employee> employeeWithoutDepartment = employeeDaoImpl.findEmployeeWithoutDepartment();
         System.out.println(employeeWithoutDepartment);
+
+        employeeDaoImpl.delete(employee);
+
+        System.out.println("После удаления");
+        List<Employee> employeeWithoutDepartment1 = employeeDaoImpl.findEmployeeWithoutDepartment();
+        System.out.println(employeeWithoutDepartment1);
+
+
         context.close();
     }
 }

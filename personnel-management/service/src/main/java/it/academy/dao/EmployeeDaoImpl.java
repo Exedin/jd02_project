@@ -1,7 +1,9 @@
 package it.academy.dao;
 
 import it.academy.model.Employee;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,5 +27,27 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 .list();
 
         return employees;
+    }
+
+    @Override
+    public String save(Employee employee) {
+        Session session = sessionFactory
+                .openSession();
+        final Transaction transaction = session.beginTransaction();
+        String id = (String) session
+                .save(employee);
+        transaction.commit();
+        return id;
+    }
+
+    @Override
+    public void delete(Employee employee) {
+        Session session = sessionFactory
+                .openSession();
+        final Transaction transaction = session.beginTransaction();
+        session
+                .delete(employee);
+        transaction.commit();
+
     }
 }
