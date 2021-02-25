@@ -16,6 +16,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     SessionFactory sessionFactory;
 
     @Autowired
+    DepartmentDaoImpl departmentDaoImpl;
+
+    @Autowired
     public EmployeeDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -56,5 +59,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee getOneEmployee(String id) {
         Employee employee=sessionFactory.openSession().get(Employee.class, id);
         return employee;
+    }
+
+    @Override
+    public void removeEmployeeFromDepartment(String id) {
+        Employee employee=sessionFactory.openSession().get(Employee.class, id);
+        employee.setDepartment(null);
+        Session session = sessionFactory
+                .openSession();
+        final Transaction transaction = session.beginTransaction();
+        session.update(employee);
+        transaction.commit();
+
+    }
+
+    @Override
+    public String addEmployeeToDepartment(String employeeId, String departmentId) {
+        Department oneDepartment = departmentDaoImpl.getOneDepartment(departmentId);
+        Employee employee=sessionFactory.openSession().get(Employee.class, employeeId);
+        employee.setDepartment(oneDepartment);
+        Session session = sessionFactory
+                .openSession();
+        final Transaction transaction = session.beginTransaction();
+        session.update(employee);
+        transaction.commit();
+
+        return null;
     }
 }

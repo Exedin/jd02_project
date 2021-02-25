@@ -28,48 +28,48 @@ public class Main {
         final EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
 
 
-        final Department oneDepartment = departmentDaoImpl.getOneDepartment("4028b88177d913b20177d913b4120002");
-        System.out.println("\n\n\nОдин департамент!");
-        System.out.println(oneDepartment);
-
-        final List<Employee> employeeWithoutDepartment = employeeDaoImpl.findEmployeeWithoutDepartment();
-        System.out.println("\n\n\nРаботники без департаменты!");
-        System.out.println(employeeWithoutDepartment);
-
-        final Employee oneEmployee = employeeDaoImpl.getOneEmployee("4028b88177d455bf0177d455c1c20000");
-        System.out.println("\n\n\nОдин работник");
-        System.out.println(oneEmployee);
-
-        employeeDaoImpl.delete(oneEmployee);
-
-
-
-//        departmentDaoImpl.deleteDepartment(oneDepartment);
+//        final Department oneDepartment = departmentDaoImpl.getOneDepartment("4028b88177d913b20177d913b4120002");
+//        System.out.println("\n\n\nОдин департамент!");
+//        System.out.println(oneDepartment);
 //
-//        System.out.println("\n\n\nВсе департаменты!");
-//        List<Department> allDepartment = departmentDaoImpl.findAllDepartment();
-//        System.out.println(allDepartment);
-
-
-
-//        EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
-//
-//
-//        Employee employee=new Employee();
-//        EmployeeFullName employeeFullName=
-//                new EmployeeFullName("TestName", "TestSurname", "TestMiddle");
-//        employee.setFullName(employeeFullName);
-//        String save = employeeDaoImpl.save(employee);
-
-//        List<Employee> employeeWithoutDepartment = employeeDaoImpl.findEmployeeWithoutDepartment();
+//        final List<Employee> employeeWithoutDepartment = employeeDaoImpl.findEmployeeWithoutDepartment();
+//        System.out.println("\n\n\nРаботники без департаменты!");
 //        System.out.println(employeeWithoutDepartment);
 //
-//        employeeDaoImpl.delete(employee);
+//        final Employee oneEmployee = employeeDaoImpl.getOneEmployee("4028b88177d455bf0177d455c1c20000");
+//        System.out.println("\n\n\nОдин работник");
+//        System.out.println(oneEmployee);
 //
-//        System.out.println("После удаления");
-//        List<Employee> employeeWithoutDepartment1 = employeeDaoImpl.findEmployeeWithoutDepartment();
-//        System.out.println(employeeWithoutDepartment1);
+//        departmentDaoImpl.deleteDepartment(oneDepartment);
 
+
+//        Employee employee1 = new Employee(null,
+//                new EmployeeFullName("Andrei1", "Trukhanovich1", "Vladimirovich1"),
+//                "26.05.1988",
+//                "+375295592527",
+//                "deathexedin@gmail.com",
+//                "engeneer",
+//                "01.01.2017", null);
+//        employeeDaoImpl.save(employee1);
+
+
+//        Department department=new Department(null,
+//                "Eng",
+//                "8017-2421906",
+//                "01.09.2008",
+//                "Detapment of ingeneer", null
+//        );
+//
+//        final String save = departmentDaoImpl.save(department);
+//        System.out.println(save);
+
+//        Employee oneEmployee = employeeDaoImpl.getOneEmployee("4028e49e776ea47d01776ea47f6c0003");
+//        System.out.println("\n\n\nОдин работник");
+//        System.out.println(oneEmployee);
+//        employeeDaoImpl.removeEmployeeFromDepartment("4028e49e776ea47d01776ea47f6c0003");
+//
+
+            employeeDaoImpl.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0003", "4028e49e776ea47d01776ea47f123001");
 
         context.close();
     }

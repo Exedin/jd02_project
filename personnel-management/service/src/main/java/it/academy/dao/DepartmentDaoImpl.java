@@ -1,6 +1,7 @@
 package it.academy.dao;
 
 import it.academy.model.Department;
+import it.academy.model.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -46,18 +47,38 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     @Override
     @Transactional
-    public void deleteDepartment(Department department) {
-//        final Session session = sessionFactory.openSession();
-//        session.delete(department);
-//        session.flush();
-        final String id = department.getId();
+    public void deleteDepartment(Department department1) {
         final Session session = sessionFactory.openSession();
-        final Transaction transaction = session.beginTransaction();
-        final Query query = session.createQuery("delete from Department where id=:id", Department.class);
-        query.setParameter(1, id);
-        query.executeUpdate();
-        transaction.commit();
+        final List<Department> departments =
+                session.createQuery("from Department where id='4028b88177d913b20177d913b4120002'", Department.class)
+                        .list();
+        System.out.println(departments);
+        Department department = departments.get(0);
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            //do some work
+            final List<Employee> employeeList = department.getEmployeeList();
+            employeeList.stream().forEach(employee -> employee.setDepartment(null));
+            session.delete(department);
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
-
+    @Override
+    public String save(Department department) {
+        Session session = sessionFactory
+                .openSession();
+        final Transaction transaction = session.beginTransaction();
+        String id = (String) session
+                .save(department);
+        transaction.commit();
+        return id;
+    }
 }
