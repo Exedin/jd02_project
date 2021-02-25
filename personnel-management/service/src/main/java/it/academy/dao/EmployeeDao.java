@@ -8,6 +8,7 @@ import java.util.List;
 public interface EmployeeDao {
 
     public List<Employee> findEmployeeWithoutDepartment();
+    public Employee getOneEmployee(String id);
     public String save(Employee employee);
     public void delete(Employee employee);
 }

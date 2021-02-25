@@ -7,12 +7,17 @@ import it.academy.model.Employee;
 import it.academy.model.EmployeeFullName;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 import javax.sql.DataSource;
@@ -20,6 +25,8 @@ import java.util.Properties;
 
 @PropertySource(value = "classpath:datasource.properties")
 @Configuration
+@ComponentScan(basePackages = "it.academy")
+//@EnableTransactionManagement
 public class DaoConfiguration {
 
     @Autowired
@@ -52,5 +59,10 @@ public class DaoConfiguration {
 
         sessionFactoryBean.setHibernateProperties(properties);
         return sessionFactoryBean;
+    }
+    @Bean
+    public PlatformTransactionManager transactionManager(
+            SessionFactory sessionFactory) {
+        return new HibernateTransactionManager(sessionFactory);
     }
 }

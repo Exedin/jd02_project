@@ -1,5 +1,6 @@
 package it.academy.dao;
 
+import it.academy.model.Department;
 import it.academy.model.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,5 +50,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 .delete(employee);
         transaction.commit();
 
+    }
+
+    @Override
+    public Employee getOneEmployee(String id) {
+        Employee employee=sessionFactory.openSession().get(Employee.class, id);
+        return employee;
     }
 }
