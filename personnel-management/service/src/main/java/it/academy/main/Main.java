@@ -38,6 +38,8 @@ public class Main {
         System.out.println("\n\n\n"+allDepartment);
 
 
+        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123001");
+
 //        final DepartmentDaoImpl departmentDaoImpl = context.getBean("departmentDaoImpl", DepartmentDaoImpl.class);
 //        final EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
 

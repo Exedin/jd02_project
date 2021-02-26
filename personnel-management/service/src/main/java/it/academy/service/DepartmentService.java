@@ -26,8 +26,10 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void deleteDepartment (Department department){
-
+    public void deleteDepartment (String id){
+        Department oneDepartment = departmentDao.getOneDepartment(id);
+//        departmentDao.removeAllEmployeeFromDepartment(oneDepartment);
+        departmentDao.deleteDepartment(oneDepartment);
     }
 
 

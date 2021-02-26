@@ -43,28 +43,34 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     @Override
-    public void deleteDepartment(Department department1) {
+    public void deleteDepartment(Department department) {
+//        final Session session = sessionFactory.openSession();
+//        final List<Department> departments =
+//                session.createQuery("from Department where id='4028b88177d913b20177d913b4120002'", Department.class)
+//                        .list();
+//        System.out.println(departments);
+//        Department department = departments.get(0);
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            //do some work
+//            final List<Employee> employeeList = department.getEmployeeList();
+//            employeeList.stream().forEach(employee -> employee.setDepartment(null));
+//            session.delete(department);
+//            tx.commit();
+//
+//        } catch (Exception e) {
+//            if (tx != null) tx.rollback();
+//            throw e;
+//        } finally {
+//            session.close();
+//        }
         final Session session = sessionFactory.openSession();
-        final List<Department> departments =
-                session.createQuery("from Department where id='4028b88177d913b20177d913b4120002'", Department.class)
-                        .list();
-        System.out.println(departments);
-        Department department = departments.get(0);
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
             //do some work
             final List<Employee> employeeList = department.getEmployeeList();
             employeeList.stream().forEach(employee -> employee.setDepartment(null));
             session.delete(department);
-            tx.commit();
 
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            throw e;
-        } finally {
-            session.close();
-        }
     }
 
     @Override
@@ -76,5 +82,13 @@ public class DepartmentDaoImpl implements DepartmentDao{
                 .save(department);
         transaction.commit();
         return id;
+    }
+
+    @Override
+    public void removeAllEmployeeFromDepartment(Department department) {
+        final Session currentSession = sessionFactory.openSession();
+        List<Employee> employeeList = department.getEmployeeList();
+        employeeList.stream().forEach(employee -> employee.setDepartment(null));
+        currentSession.update(department);
     }
 }

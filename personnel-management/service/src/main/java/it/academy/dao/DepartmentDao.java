@@ -11,4 +11,5 @@ public interface DepartmentDao {
     public String createDepartment(String id);
     public void deleteDepartment(Department department);
     public String save(Department department);
+    public void removeAllEmployeeFromDepartment(Department department);
 }
