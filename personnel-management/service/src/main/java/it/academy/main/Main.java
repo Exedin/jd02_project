@@ -28,13 +28,14 @@ public class Main {
 
         Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
         final DepartmentService departmentService = context.getBean("departmentService", DepartmentService.class);
-        System.out.println(departmentService.getClass());
-        if (departmentService instanceof DepartmentService) {
-            System.out.println("ДА!");
-        }
-        final Department department = departmentService.getDepartment("4028e49e776ea47d01776ea47f123002");
+
+        //Один департамент
+        Department department = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f123002");
         System.out.println(department);
 
+        //все департаменты
+        final List<Department> allDepartment = departmentService.getAllDepartment();
+        System.out.println("\n\n\n"+allDepartment);
 
 
 //        final DepartmentDaoImpl departmentDaoImpl = context.getBean("departmentDaoImpl", DepartmentDaoImpl.class);

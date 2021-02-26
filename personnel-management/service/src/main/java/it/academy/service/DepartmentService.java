@@ -14,9 +14,17 @@ public class DepartmentService {
     @Autowired
     DepartmentDaoImpl departmentDao;
 
-    @Transactional
-    public Department getDepartment(String id){
+    @Transactional(readOnly = true)
+    public Department getOneDepartment(String id){
         return departmentDao.getOneDepartment(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Department> getAllDepartment(){
+        List<Department> allDepartment = departmentDao.getAllDepartment();
+        return allDepartment;
+    }
+
+
 
 }

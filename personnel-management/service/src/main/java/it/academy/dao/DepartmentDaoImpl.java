@@ -23,7 +23,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     @Override
-    public List<Department> findAllDepartment() {
+    public List<Department> getAllDepartment() {
         final List<Department> departments = sessionFactory
                 .openSession()
                 .createQuery("from Department", Department.class)

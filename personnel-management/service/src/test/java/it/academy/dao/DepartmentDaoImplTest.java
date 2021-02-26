@@ -22,8 +22,9 @@ public class DepartmentDaoImplTest {
     @org.junit.Test
     @Transactional
     public void getOneDepartment() {
-        Department oneDepartment = departmentService.getDepartment("4028e49e776ea47d01776ea47f123001");
+        Department oneDepartment = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f123001");
         System.out.println("\n\n\nОдин департамент!");
         System.out.println(oneDepartment);
     }
+
 }

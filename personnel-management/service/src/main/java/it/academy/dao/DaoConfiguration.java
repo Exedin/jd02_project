@@ -53,7 +53,7 @@ public class DaoConfiguration {
                 Department.class, Employee.class, EmployeeFullName.class
         );
         Properties properties = new Properties();
-        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.show_sql", "false");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
 
