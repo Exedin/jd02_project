@@ -25,6 +25,11 @@ public class DepartmentService {
         return allDepartment;
     }
 
+    @Transactional
+    public void deleteDepartment (Department department){
+
+    }
+
 
 
 }
