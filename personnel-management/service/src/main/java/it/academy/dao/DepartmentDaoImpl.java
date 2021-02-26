@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public class DepartmentDaoImpl implements DepartmentDao{
 
     SessionFactory sessionFactory;
@@ -24,7 +23,6 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     @Override
-    @Transactional
     public List<Department> findAllDepartment() {
         final List<Department> departments = sessionFactory
                 .openSession()
@@ -34,7 +32,6 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     @Override
-    @Transactional
     public Department getOneDepartment(String id) {
         Department department=sessionFactory.openSession().get(Department.class, id);
         return department;
@@ -46,7 +43,6 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     @Override
-    @Transactional
     public void deleteDepartment(Department department1) {
         final Session session = sessionFactory.openSession();
         final List<Department> departments =

@@ -7,8 +7,10 @@ import it.academy.dao.EmployeeDaoImpl;
 import it.academy.model.Department;
 import it.academy.model.Employee;
 import it.academy.model.EmployeeFullName;
+import it.academy.service.DepartmentService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -23,9 +25,20 @@ public class Main {
         AnnotationConfigApplicationContext context=
                 new AnnotationConfigApplicationContext(DaoConfiguration.class);
 
+
         Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
-        DepartmentDaoImpl departmentDaoImpl = context.getBean("departmentDaoImpl", DepartmentDaoImpl.class);
-        final EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
+        final DepartmentService departmentService = context.getBean("departmentService", DepartmentService.class);
+        System.out.println(departmentService.getClass());
+        if (departmentService instanceof DepartmentService) {
+            System.out.println("ДА!");
+        }
+        final Department department = departmentService.getDepartment("4028e49e776ea47d01776ea47f123002");
+        System.out.println(department);
+
+
+
+//        final DepartmentDaoImpl departmentDaoImpl = context.getBean("departmentDaoImpl", DepartmentDaoImpl.class);
+//        final EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
 
 
 //        final Department oneDepartment = departmentDaoImpl.getOneDepartment("4028b88177d913b20177d913b4120002");
@@ -69,7 +82,7 @@ public class Main {
 //        employeeDaoImpl.removeEmployeeFromDepartment("4028e49e776ea47d01776ea47f6c0003");
 //
 
-            employeeDaoImpl.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0003", "4028e49e776ea47d01776ea47f123001");
+//            employeeDaoImpl.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0003", "4028e49e776ea47d01776ea47f123001");
 
         context.close();
     }

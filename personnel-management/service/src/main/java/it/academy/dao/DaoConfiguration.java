@@ -26,7 +26,7 @@ import java.util.Properties;
 @PropertySource(value = "classpath:datasource.properties")
 @Configuration
 @ComponentScan(basePackages = "it.academy")
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class DaoConfiguration {
 
     @Autowired

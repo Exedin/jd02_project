@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     SessionFactory sessionFactory;
 
-    @Autowired
-    DepartmentDaoImpl departmentDaoImpl;
+//    @Autowired
+//    DepartmentDaoImpl departmentDaoImpl;
 
     @Autowired
     public EmployeeDaoImpl(SessionFactory sessionFactory) {
@@ -24,6 +25,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
+    @Transactional
     public List<Employee> findEmployeeWithoutDepartment() {
         List<Employee> employees = sessionFactory
                 .openSession()
@@ -75,14 +77,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public String addEmployeeToDepartment(String employeeId, String departmentId) {
-        Department oneDepartment = departmentDaoImpl.getOneDepartment(departmentId);
-        Employee employee=sessionFactory.openSession().get(Employee.class, employeeId);
-        employee.setDepartment(oneDepartment);
-        Session session = sessionFactory
-                .openSession();
-        final Transaction transaction = session.beginTransaction();
-        session.update(employee);
-        transaction.commit();
+//        Department oneDepartment = departmentDaoImpl.getOneDepartment(departmentId);
+//        Employee employee=sessionFactory.openSession().get(Employee.class, employeeId);
+//        employee.setDepartment(oneDepartment);
+//        Session session = sessionFactory
+//                .openSession();
+//        final Transaction transaction = session.beginTransaction();
+//        session.update(employee);
+//        transaction.commit();
 
         return null;
     }
