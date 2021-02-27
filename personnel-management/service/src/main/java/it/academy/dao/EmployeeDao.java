@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface EmployeeDao {
 
-    public List<Employee> findEmployeeWithoutDepartment();
+    public List<Employee> getAllEmployeeWithoutDepartment();
     public Employee getOneEmployee(String id);
-    public String save(Employee employee);
-    public void delete(Employee employee);
+    public String createEmployee(Employee employee);
+    public void delete(String id);
     public void removeEmployeeFromDepartment(String id);
-    public String addEmployeeToDepartment(String employeeId, String departmentId);
+    public void addEmployeeToDepartment(String employeeId, String departmentId);
 
 
 

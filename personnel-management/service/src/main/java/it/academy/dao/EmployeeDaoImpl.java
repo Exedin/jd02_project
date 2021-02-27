@@ -25,7 +25,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> findEmployeeWithoutDepartment() {
+    public List<Employee> getAllEmployeeWithoutDepartment() {
         List<Employee> employees = sessionFactory
                 .openSession()
                 .createQuery("from Employee where D_ID is null", Employee.class)
@@ -35,7 +35,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public String save(Employee employee) {
+    public String createEmployee(Employee employee) {
         Session session = sessionFactory
                 .openSession();
         final Transaction transaction = session.beginTransaction();
@@ -46,13 +46,25 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public void delete(Employee employee) {
-        Session session = sessionFactory
-                .openSession();
-        final Transaction transaction = session.beginTransaction();
-        session
-                .delete(employee);
-        transaction.commit();
+    public void delete(String id) {
+
+        final Session session = sessionFactory.openSession();
+        final List<Employee> list = session.createQuery("from Employee where id='" + id + "'", Employee.class).list();
+        System.out.println(list);
+        Employee employee = list.get(0);
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            //do some work
+            session.delete(employee);
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
 
     }
 
@@ -75,7 +87,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public String addEmployeeToDepartment(String employeeId, String departmentId) {
+    public void addEmployeeToDepartment(String employeeId, String departmentId) {
         Department oneDepartment = departmentDaoImpl.getOneDepartment(departmentId);
         Employee employee=sessionFactory.openSession().get(Employee.class, employeeId);
         employee.setDepartment(oneDepartment);
@@ -85,6 +97,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
         session.update(employee);
         transaction.commit();
 
-        return null;
     }
 }

@@ -1,19 +1,11 @@
 package it.academy.main;
 
 import it.academy.dao.DaoConfiguration;
-import it.academy.dao.DepartmentDao;
-import it.academy.dao.DepartmentDaoImpl;
-import it.academy.dao.EmployeeDaoImpl;
 import it.academy.model.Department;
 import it.academy.model.Employee;
-import it.academy.model.EmployeeFullName;
 import it.academy.service.DepartmentService;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import it.academy.service.EmployeeService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,12 +14,13 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context=
+        AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DaoConfiguration.class);
 
 
         Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
         final DepartmentService departmentService = context.getBean("departmentService", DepartmentService.class);
+        final EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
 
         //Один департамент
         Department department = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f123002");
@@ -35,7 +28,16 @@ public class Main {
 
         //все департаменты
         final List<Department> allDepartment = departmentService.getAllDepartment();
-        System.out.println("\n\n\n"+allDepartment);
+        System.out.println("\n\n\n" + allDepartment);
+
+        final List<Employee> allEmployeeWithoutDepartment = employeeService.getAllEmployeeWithoutDepartment();
+        System.out.println(allEmployeeWithoutDepartment);
+
+//        employeeService.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0001", "4028b88177e2a5c50177e2a5c7f40000");
+//        employeeService.removeEmployeeFromDepartment("4028e49e776ea47d01776ea47f6c0001");
+
+
+//        employeeService.deleteEmployee("4028b88177d98dfe0177d98e00ca0000");
 
 //        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123002");
 //        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123001");
@@ -69,15 +71,16 @@ public class Main {
 //        employeeDaoImpl.save(employee1);
 
 
-        Department department1=new Department(null,
-                "Eng",
-                "8017-2421906",
-                "01.09.2008",
-                "Detapment of ingeneer", null
-        );
-//
-        String save = departmentService.save(department1);
-        System.out.println(save);
+//        Department department1=new Department(null,
+//                "Eng",
+//                "8017-2421906",
+//                "01.09.2008",
+//                "Detapment of ingeneer", null
+//        );
+////
+//        String save = departmentService.createDepartment(department1);
+//        System.out.println(save);
+
 
 //        Employee oneEmployee = employeeDaoImpl.getOneEmployee("4028e49e776ea47d01776ea47f6c0003");
 //        System.out.println("\n\n\nОдин работник");
@@ -85,7 +88,6 @@ public class Main {
 //        employeeDaoImpl.removeEmployeeFromDepartment("4028e49e776ea47d01776ea47f6c0003");
 //
 
-//            employeeDaoImpl.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0003", "4028e49e776ea47d01776ea47f123001");
 
         context.close();
     }

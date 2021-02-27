@@ -10,6 +10,6 @@ public interface DepartmentDao {
     public Department getOneDepartment(String id);
 //    public String createDepartment(String id);
     public void deleteDepartment(String id);
-    public String save(Department department);
+    public String createDepartment(Department department);
 //    public void removeAllEmployeeFromDepartment(Department department);
 }

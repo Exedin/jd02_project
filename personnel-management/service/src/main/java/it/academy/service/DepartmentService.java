@@ -31,8 +31,8 @@ public class DepartmentService {
     }
 
     @Transactional
-    public String save (Department department){
-        String save = departmentDao.save(department);
+    public String createDepartment (Department department){
+        String save = departmentDao.createDepartment(department);
         return save;
     }
 

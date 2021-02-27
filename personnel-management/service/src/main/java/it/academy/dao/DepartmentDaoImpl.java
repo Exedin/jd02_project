@@ -39,7 +39,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
 
     @Override
-    public String save(Department department) {
+    public String createDepartment(Department department) {
         Session session = sessionFactory
                 .openSession();
         final Transaction transaction = session.beginTransaction();
