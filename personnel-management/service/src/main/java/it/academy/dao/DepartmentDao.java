@@ -8,8 +8,8 @@ import java.util.List;
 public interface DepartmentDao {
     public List<Department> getAllDepartment();
     public Department getOneDepartment(String id);
-    public String createDepartment(String id);
-    public void deleteDepartment(Department department);
+//    public String createDepartment(String id);
+    public void deleteDepartment(String id);
     public String save(Department department);
-    public void removeAllEmployeeFromDepartment(Department department);
+//    public void removeAllEmployeeFromDepartment(Department department);
 }

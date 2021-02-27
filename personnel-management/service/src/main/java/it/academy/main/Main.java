@@ -37,8 +37,8 @@ public class Main {
         final List<Department> allDepartment = departmentService.getAllDepartment();
         System.out.println("\n\n\n"+allDepartment);
 
-
-        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123001");
+//        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123002");
+//        departmentService.deleteDepartment("4028e49e776ea47d01776ea47f123001");
 
 //        final DepartmentDaoImpl departmentDaoImpl = context.getBean("departmentDaoImpl", DepartmentDaoImpl.class);
 //        final EmployeeDaoImpl employeeDaoImpl = context.getBean("employeeDaoImpl", EmployeeDaoImpl.class);
@@ -69,15 +69,15 @@ public class Main {
 //        employeeDaoImpl.save(employee1);
 
 
-//        Department department=new Department(null,
-//                "Eng",
-//                "8017-2421906",
-//                "01.09.2008",
-//                "Detapment of ingeneer", null
-//        );
+        Department department1=new Department(null,
+                "Eng",
+                "8017-2421906",
+                "01.09.2008",
+                "Detapment of ingeneer", null
+        );
 //
-//        final String save = departmentDaoImpl.save(department);
-//        System.out.println(save);
+        String save = departmentService.save(department1);
+        System.out.println(save);
 
 //        Employee oneEmployee = employeeDaoImpl.getOneEmployee("4028e49e776ea47d01776ea47f6c0003");
 //        System.out.println("\n\n\nОдин работник");
