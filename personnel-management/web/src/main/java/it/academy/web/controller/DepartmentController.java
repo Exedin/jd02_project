@@ -23,18 +23,18 @@ public class DepartmentController {
 
     @GetMapping ("/getAll")
     public String getAllDepartment (Model model){
-        model.addAttribute("allDepartment", departmentDao.findAllDepartment());
+        model.addAttribute("allDepartment", departmentDao.getAllDepartment());
         return "allDepartment";
     }
     @GetMapping ("/getOne")
     public String getOneDepartment (Model model){
-        model.addAttribute("allDepartment", departmentDao.findAllDepartment());
+        model.addAttribute("allDepartment", departmentDao.getAllDepartment());
         return "findOneDepartment";
     }
 
     @PostMapping ("/showOne")
     public String showOneDepartment (@RequestParam(value = "search") String name, Model model){
-        final Department dep = departmentDao.findAllDepartment().stream()
+        final Department dep = departmentDao.getAllDepartment().stream()
                 .filter(department -> department.getName().toLowerCase().equals(name.toLowerCase()))
                 .findFirst().orElse(null);
         model.addAttribute("department", dep);

@@ -36,11 +36,11 @@ public class Department {
     String description;
 
 
-    @OneToMany (mappedBy = "department",
+    @OneToMany (mappedBy = "department")
 //            cascade = CascadeType.ALL)
 
-            cascade = {CascadeType.PERSIST,
-            CascadeType.REFRESH})
+//            cascade = {CascadeType.PERSIST,
+//            CascadeType.REFRESH})
     List<Employee> employeeList;
 
 

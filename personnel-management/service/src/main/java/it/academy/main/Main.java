@@ -23,15 +23,19 @@ public class Main {
         final EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
 
         //Один департамент
-        Department department = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f123002");
+        Department department = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f123001");
         System.out.println(department);
 
-        //все департаменты
-        final List<Department> allDepartment = departmentService.getAllDepartment();
-        System.out.println("\n\n\n" + allDepartment);
+        //один работник
+        final Employee oneEmployee = employeeService.getOneEmployee("4028e49e776ea47d01776ea47f6c0001");
+        System.out.println(oneEmployee);
 
-        final List<Employee> allEmployeeWithoutDepartment = employeeService.getAllEmployeeWithoutDepartment();
-        System.out.println(allEmployeeWithoutDepartment);
+//        //все департаменты
+//        final List<Department> allDepartment = departmentService.getAllDepartment();
+//        System.out.println("\n\n\n" + allDepartment);
+//
+//        final List<Employee> allEmployeeWithoutDepartment = employeeService.getAllEmployeeWithoutDepartment();
+//        System.out.println(allEmployeeWithoutDepartment);
 
 //        employeeService.addEmployeeToDepartment("4028e49e776ea47d01776ea47f6c0001", "4028b88177e2a5c50177e2a5c7f40000");
 //        employeeService.removeEmployeeFromDepartment("4028e49e776ea47d01776ea47f6c0001");

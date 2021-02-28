@@ -1,9 +1,7 @@
 package it.academy.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "T_EMP")
 @Entity
 @Builder
+@JsonIgnoreProperties({ "department" })
 public class Employee{
 
     @Id
@@ -43,20 +42,22 @@ public class Employee{
 
     @ManyToOne
     @JoinColumn(name ="D_ID" )
+            @ToString.Exclude
+
     Department department;
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id='" + id + '\'' +
-                ", fullName=" + fullName +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", position='" + position + '\'' +
-                ", dateOfEmployment='" + dateOfEmployment + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                "id='" + id + '\'' +
+//                ", fullName=" + fullName +
+//                ", dateOfBirth='" + dateOfBirth + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", email='" + email + '\'' +
+//                ", position='" + position + '\'' +
+//                ", dateOfEmployment='" + dateOfEmployment + '\'' +
+//                '}';
+//    }
 }
 
 
