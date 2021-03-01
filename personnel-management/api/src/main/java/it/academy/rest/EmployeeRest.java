@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class EmployeeRest {
 
     @Autowired
     EmployeeService employeeService;
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/employees/{id}")
     @ApiOperation("Read one employee")
-    public ResponseEntity<Employee> readEmployee(@PathVariable String id) {
+    public ResponseEntity<Employee> readOneEmployee(@PathVariable String id) {
 
         final Employee oneEmployee = employeeService.getOneEmployee(id);
         if (oneEmployee == null) {
@@ -27,5 +29,6 @@ public class EmployeeRest {
         }
         return new ResponseEntity<>(oneEmployee, HttpStatus.OK);
     }
+
 
 }

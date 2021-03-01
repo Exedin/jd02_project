@@ -6,9 +6,7 @@ import it.academy.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,20 @@ public class DepartmentRest {
         List<Department> allDepartment = departmentService.getAllDepartment();
         return new ResponseEntity<>(allDepartment, HttpStatus.OK);
     }
+
+    @DeleteMapping("/departments/{id}")
+    @ApiOperation("Delete one department")
+    public ResponseEntity deleteDepartment(@PathVariable String id) {
+        departmentService.deleteDepartment(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/departments")
+    @ApiOperation("Create department")
+    public ResponseEntity createDepartment(@RequestBody Department department){
+        departmentService.createDepartment(department);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
 
 }
