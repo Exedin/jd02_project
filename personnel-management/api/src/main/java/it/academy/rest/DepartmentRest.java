@@ -16,7 +16,7 @@ public class DepartmentRest {
     @Autowired
     DepartmentService departmentService;
 
-    @GetMapping("/departments/{id}")
+    @GetMapping("/departments/{departmentId}")
     @ApiOperation("Read one department")
     public ResponseEntity<Department> readDepartment(@PathVariable String departmentId) {
 
@@ -34,7 +34,7 @@ public class DepartmentRest {
         return new ResponseEntity<>(allDepartment, HttpStatus.OK);
     }
 
-    @DeleteMapping("/departments/{id}")
+    @DeleteMapping("/departments/{departmentId}")
     @ApiOperation("Delete one department")
     public ResponseEntity deleteDepartment(@PathVariable String departmentId) {
         departmentService.deleteDepartment(departmentId);

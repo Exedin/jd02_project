@@ -1,6 +1,6 @@
 package it.academy.service;
 
-import it.academy.dao.EmployeeDaoImpl;
+import it.academy.dao.EmployeeDao;
 import it.academy.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class EmployeeService {
 
     @Autowired
-    EmployeeDaoImpl employeeDaoImpl;
+    EmployeeDao employeeDaoImpl;
 
     @Transactional
     public Employee getOneEmployee(String id) {

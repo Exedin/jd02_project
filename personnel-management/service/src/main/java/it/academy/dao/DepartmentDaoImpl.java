@@ -10,16 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public class DepartmentDaoImpl implements DepartmentDao{
+public class DepartmentDaoImpl implements DepartmentDao {
 
     SessionFactory sessionFactory;
 
     @Autowired
     public DepartmentDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory=sessionFactory;
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -33,58 +34,62 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     @Override
     public Department getOneDepartment(String id) {
-        Department department=sessionFactory.openSession().get(Department.class, id);
+        Department department = sessionFactory.openSession().get(Department.class, id);
         return department;
     }
 
 
+    //    @Override
+//    public String createDepartment(Department department) {
+//        Session session = sessionFactory
+//                .openSession();
+//        final Transaction transaction = session.beginTransaction();
+//        String id = (String) session
+//                .save(department);
+//        transaction.commit();
+//        return id;
+//    }
     @Override
     public String createDepartment(Department department) {
-        Session session = sessionFactory
-                .openSession();
-        final Transaction transaction = session.beginTransaction();
-        String id = (String) session
-                .save(department);
-        transaction.commit();
-        return id;
+        Serializable save = sessionFactory.getCurrentSession().save(department);
+        return String.valueOf(save);
     }
 
     @Override
     public void deleteDepartment(String id) {
-        final Session session = sessionFactory.openSession();
-        final List<Department> departments =
-                session.createQuery("from Department where id='"+id+"'", Department.class)
-                        .list();
-        System.out.println(departments);
-        Department department = departments.get(0);
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            //do some work
-            final List<Employee> employeeList = department.getEmployeeList();
-            employeeList.stream().forEach(employee -> employee.setDepartment(null));
-            session.delete(department);
-            tx.commit();
-
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            throw e;
-        } finally {
-            session.close();
-        }
+        Department department = sessionFactory
+                .getCurrentSession()
+                .createQuery("from Department where id='" + id + "'", Department.class)
+                .list().get(0);
+        List<Employee> employeeList = department.getEmployeeList();
+        employeeList.stream().forEach(employee -> employee.setDepartment(null));
+        sessionFactory.getCurrentSession().delete(department);
 
     }
-    //    @Override
-//    public String createDepartment(String id) {
-//        return null;
-//    }
-
-
 //    @Override
-//    public void removeAllEmployeeFromDepartment(Department department) {
-//        final Session currentSession = sessionFactory.openSession();
-//        List<Employee> employeeList = department.getEmployeeList();
-//        employeeList.stream().forEach(employee -> employee.setDepartment(null));
-//        currentSession.update(department);
+//    public void deleteDepartment(String id) {
+//        final Session session = sessionFactory.openSession();
+//        final List<Department> departments =
+//                session.createQuery("from Department where id='"+id+"'", Department.class)
+//                        .list();
+//        System.out.println(departments);
+//        Department department = departments.get(0);
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            //do some work
+//            final List<Employee> employeeList = department.getEmployeeList();
+//            employeeList.stream().forEach(employee -> employee.setDepartment(null));
+//            session.delete(department);
+//            tx.commit();
+//
+//        } catch (Exception e) {
+//            if (tx != null) tx.rollback();
+//            throw e;
+//        } finally {
+//            session.close();
+//        }
+//
 //    }
+
 }

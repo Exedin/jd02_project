@@ -1,6 +1,6 @@
 package it.academy.service;
 
-import it.academy.dao.DepartmentDaoImpl;
+import it.academy.dao.DepartmentDao;
 import it.academy.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class DepartmentService {
 
     @Autowired
-    DepartmentDaoImpl departmentDao;
+    DepartmentDao departmentDao;
 
     @Transactional(readOnly = true)
     public Department getOneDepartment(String id){

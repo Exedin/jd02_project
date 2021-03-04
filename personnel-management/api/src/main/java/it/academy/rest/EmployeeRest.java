@@ -34,14 +34,14 @@ public class EmployeeRest {
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @DeleteMapping("/employees/department_remove/{id}")
+    @DeleteMapping("/employees/department_remove/{employeeId}")
     @ApiOperation("Remove one employee from department")
     public ResponseEntity deleteDepartment(@PathVariable String employeeId) {
         employeeService.removeEmployeeFromDepartment(employeeId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/employees/{employeeId}")
     @ApiOperation("Remove one employee")
     public ResponseEntity deleteEmployee(@PathVariable String employeeId) {
         employeeService.deleteEmployee(employeeId);
