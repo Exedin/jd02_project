@@ -1,7 +1,6 @@
 package it.academy.rest;
 
 import io.swagger.annotations.ApiOperation;
-import it.academy.model.Department;
 import it.academy.model.Employee;
 import it.academy.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
