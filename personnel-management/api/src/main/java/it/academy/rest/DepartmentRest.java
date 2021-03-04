@@ -18,9 +18,9 @@ public class DepartmentRest {
 
     @GetMapping("/departments/{id}")
     @ApiOperation("Read one department")
-    public ResponseEntity<Department> readDepartment(@PathVariable String id) {
+    public ResponseEntity<Department> readDepartment(@PathVariable String departmentId) {
 
-        final Department oneDepartment = departmentService.getOneDepartment(id);
+        final Department oneDepartment = departmentService.getOneDepartment(departmentId);
         if (oneDepartment == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -36,8 +36,8 @@ public class DepartmentRest {
 
     @DeleteMapping("/departments/{id}")
     @ApiOperation("Delete one department")
-    public ResponseEntity deleteDepartment(@PathVariable String id) {
-        departmentService.deleteDepartment(id);
+    public ResponseEntity deleteDepartment(@PathVariable String departmentId) {
+        departmentService.deleteDepartment(departmentId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
