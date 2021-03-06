@@ -42,8 +42,7 @@ public class Employee{
 
     @ManyToOne
     @JoinColumn(name ="D_ID" )
-            @ToString.Exclude
-
+    @ToString.Exclude
     Department department;
 
 //    @Override

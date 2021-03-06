@@ -16,7 +16,7 @@ public class EmployeeRest {
     @Autowired
     EmployeeService employeeService;
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/employees/{employeeId}")
     @ApiOperation("Read one employee")
     public ResponseEntity<Employee> readOneEmployee(@PathVariable String employeeId) {
 
