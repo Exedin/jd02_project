@@ -50,7 +50,10 @@ public class DepartmentService {
     }
 
     @Transactional
-    public String createDepartment (Department department){
+    public String createDepartment (Department department) throws IllegalArgumentException {
+        if (department == null) {
+            throw new IllegalArgumentException("Illegal argument");
+        }
         String save = departmentDao.createDepartment(department);
         return save;
     }

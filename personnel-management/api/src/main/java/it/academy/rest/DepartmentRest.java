@@ -45,9 +45,6 @@ public class DepartmentRest {
     @ApiOperation("Create department")
     public ResponseEntity createDepartment(@RequestBody Department department)
             throws IllegalArgumentException {
-        if (department == null) {
-            throw new IllegalArgumentException("Illegal argument");
-        }
         departmentService.createDepartment(department);
         return new ResponseEntity(HttpStatus.CREATED);
     }
