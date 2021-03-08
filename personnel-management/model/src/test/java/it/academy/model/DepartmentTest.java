@@ -16,28 +16,10 @@ public class DepartmentTest extends BaseTest {
 
     @Test
     public void create(){
-        Department department=new Department(null,
-                "Eng",
-                "8017-2421906",
-                "01.09.2008",
-                "Detapment of ingeneer", null
-        );
-        Employee employee = new Employee(null,
-                new EmployeeFullName("Andrei", "Trukhanovich", "Vladimirovich"),
-                "26.05.1988",
-                "+375295592527",
-                "deathexedin@gmail.com",
-                "engeneer",
-                "01.01.2017",
-                department);
+        Department department=new Department();
+        Employee employee = new Employee();
 
-        Employee employee1 = new Employee(null,
-                new EmployeeFullName("Andrei1", "Trukhanovich1", "Vladimirovich1"),
-                "26.05.1988",
-                "+375295592527",
-                "deathexedin@gmail.com",
-                "engeneer",
-                "01.01.2017", department);
+        Employee employee1 = new Employee();
 
         List<Employee> employeeList=new ArrayList<>(2);
         employeeList.add(employee);

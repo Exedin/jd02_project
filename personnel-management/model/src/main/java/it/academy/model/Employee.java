@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
+import java.sql.Date;
 
 
 @Data
@@ -21,42 +21,31 @@ public class Employee{
     @Column(name = "E_ID")
     @GeneratedValue(generator = "uuid-generator")
     @GenericGenerator(name = "uuid-generator", strategy = "uuid")
-    String id;
+    private String id;
 
-    EmployeeFullName fullName;
+    private EmployeeFullName fullName;
 
     @Column(name = "E_BIRTH_DATE")
-    String dateOfBirth;
+    private Date dateOfBirth;
 
     @Column(name = "E_PHONE")
-    String phoneNumber;
+    private String phoneNumber;
 
     @Column(name="E_MAIL")
-    String email;
+    private String email;
 
     @Column(name="E_POSITION")
-    String position;
+    private String position;
 
     @Column(name="E_EMPLOYMENT_DATE")
-    String dateOfEmployment;
+    private Date dateOfEmployment;
 
     @ManyToOne
     @JoinColumn(name ="D_ID" )
     @ToString.Exclude
-    Department department;
+    private Department department;
 
-//    @Override
-//    public String toString() {
-//        return "Employee{" +
-//                "id='" + id + '\'' +
-//                ", fullName=" + fullName +
-//                ", dateOfBirth='" + dateOfBirth + '\'' +
-//                ", phoneNumber='" + phoneNumber + '\'' +
-//                ", email='" + email + '\'' +
-//                ", position='" + position + '\'' +
-//                ", dateOfEmployment='" + dateOfEmployment + '\'' +
-//                '}';
-//    }
+
 }
 
 

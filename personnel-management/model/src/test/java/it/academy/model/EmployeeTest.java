@@ -16,13 +16,7 @@ public class EmployeeTest extends BaseTest {
     @Test
     public void create(){
 
-        Employee employee = new Employee(null,
-                new EmployeeFullName("Andrei", "Trukhanovich", "Vladimirovich"),
-                "26.05.1988",
-                "+375295592527",
-                "deathexedin@gmail.com",
-                "engeneer",
-                "01.01.2017", null);
+        Employee employee = new Employee();
 
         final Session session = factory.openSession();
         Transaction tx = null;

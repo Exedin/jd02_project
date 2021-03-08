@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -22,26 +23,23 @@ public class Department {
     @Column(name = "D_ID")
     @GeneratedValue(generator = "uuid-generator")
     @GenericGenerator(name = "uuid-generator", strategy = "uuid")
-    String id;
+    private String id;
 
     @Column(name = "D_NAME")
-    String name;
+    private String name;
 
     @Column(name = "D_PHONE")
-    String phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "D_FORMATION_DATE")
-    String dateOfFormation;
+    private Date dateOfFormation;
     @Column(name = "D_DESC")
-    String description;
+    private String description;
 
 
-    @OneToMany (mappedBy = "department")
-//            cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "department", cascade = CascadeType.PERSIST)
 
-//            cascade = {CascadeType.PERSIST,
-//            CascadeType.REFRESH})
-    List<Employee> employeeList;
+    private List<Employee> employeeList;
 
 
 }
