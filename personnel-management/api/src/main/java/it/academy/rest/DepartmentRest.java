@@ -1,7 +1,10 @@
 package it.academy.rest;
 
 import io.swagger.annotations.ApiOperation;
+import it.academy.exception.IllegalArgumentException;
+import it.academy.exception.NotFoundException;
 import it.academy.model.Department;
+import it.academy.response.ErrorResponse;
 import it.academy.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +49,25 @@ public class DepartmentRest {
     public ResponseEntity createDepartment(@RequestBody Department department){
         departmentService.createDepartment(department);
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+    @ExceptionHandler
+    public ResponseEntity handleException (IllegalArgumentException exc){
+        ErrorResponse errorResponse=new ErrorResponse();
+
+        errorResponse.setMessage(exc.getMessage());
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleException (NotFoundException exc){
+        ErrorResponse errorResponse=new ErrorResponse();
+
+        errorResponse.setMessage(exc.getMessage());
+        errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        errorResponse.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 

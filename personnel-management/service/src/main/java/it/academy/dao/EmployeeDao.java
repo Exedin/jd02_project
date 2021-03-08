@@ -12,8 +12,8 @@ public interface EmployeeDao {
     public String createEmployee(Employee employee);
     public void delete(String id);
     public void removeEmployeeFromDepartment(String id);
-    public void addEmployeeToDepartment(String employeeId, String departmentId);
-
+//    public void addEmployeeToDepartment(String employeeId, String departmentId);
+    public void addEmployeeToDepartment(Employee employee, Department department);
 
 
 }

@@ -27,8 +27,8 @@ public class Main {
         System.out.println(department);
 
         //один работник
-        final Employee oneEmployee = employeeService.getOneEmployee("4028e49e776ea47d01776ea47f6c0001");
-        System.out.println(oneEmployee);
+//        final Employee oneEmployee = employeeService.getOneEmployee("4028e49e776ea47d01776ea47f6c0001");
+//        System.out.println(oneEmployee);
 
 //        //все департаменты
 //        final List<Department> allDepartment = departmentService.getAllDepartment();
