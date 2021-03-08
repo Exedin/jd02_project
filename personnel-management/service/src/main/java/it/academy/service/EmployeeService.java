@@ -74,6 +74,9 @@ public class EmployeeService {
         if (oneEmployee==null){
             throw new NotFoundException("Employee with that id doesn't exist");
         }
+        if (oneEmployee.getDepartment()==null){
+            throw new NotFoundException("Employee doesn't have a department");
+        }
         employeeDaoImpl.removeEmployeeFromDepartment(id);
     }
 
