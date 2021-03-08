@@ -34,13 +34,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department getOneDepartment(String id) {
-        if (id ==null){
-            //TODO новый эксепшен мессадж "Вы ввели null"
-        }
         Department department = sessionFactory.openSession().get(Department.class, id);
-        if (department==null){
-            //TODO новый эксепшен мессадж "Вы ввели некорретный айди"
-        }
         return department;
     }
 
@@ -55,10 +49,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public void deleteDepartment(String id) {
         Department department = sessionFactory
                 .getCurrentSession()
-                .createQuery("from Department where id='" + id + "'", Department.class)
-                .list().get(0);
-        List<Employee> employeeList = department.getEmployeeList();
-        employeeList.stream().forEach(employee -> employee.setDepartment(null));
+                .get(Department.class, id);
         sessionFactory.getCurrentSession().delete(department);
 
     }

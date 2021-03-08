@@ -56,7 +56,6 @@ public class EmployeeService {
     @Transactional
     public void addEmployeeToDepartment(String employeeId, String departmentId)
             throws NotFoundException, IllegalArgumentException {
-//        employeeDaoImpl.addEmployeeToDepartment(employeeId,departmentId);
         Employee oneEmployee = getOneEmployee(employeeId);
         Department oneDepartment = departmentDao.getOneDepartment(departmentId);
         employeeDaoImpl.addEmployeeToDepartment(oneEmployee, oneDepartment);
@@ -79,7 +78,7 @@ public class EmployeeService {
     public List<Employee> getAllEmployeeWithoutDepartment() throws NotFoundException {
         List<Employee> allEmployeeWithoutDepartment = employeeDaoImpl.getAllEmployeeWithoutDepartment();
         if (allEmployeeWithoutDepartment==null){
-            throw new NotFoundException("Employee without department doesn't exist");
+            throw new NotFoundException("Employees without department don't exist");
         }
         return allEmployeeWithoutDepartment;
     }

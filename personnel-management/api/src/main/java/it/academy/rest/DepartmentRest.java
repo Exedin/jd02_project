@@ -21,32 +21,33 @@ public class DepartmentRest {
 
     @GetMapping("/departments/{departmentId}")
     @ApiOperation("Read one department")
-    public ResponseEntity<Department> readDepartment(@PathVariable String departmentId) {
-
+    public ResponseEntity<Department> readDepartment(@PathVariable String departmentId)
+            throws NotFoundException, IllegalArgumentException {
         final Department oneDepartment = departmentService.getOneDepartment(departmentId);
-        if (oneDepartment == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(oneDepartment, HttpStatus.OK);
     }
     @GetMapping("/departments")
     @ApiOperation("Read all departments")
-    public ResponseEntity<List<Department>> readAllDepartment() {
-
+    public ResponseEntity<List<Department>> readAllDepartment() throws NotFoundException {
         List<Department> allDepartment = departmentService.getAllDepartment();
         return new ResponseEntity<>(allDepartment, HttpStatus.OK);
     }
 
     @DeleteMapping("/departments/{departmentId}")
     @ApiOperation("Delete one department")
-    public ResponseEntity deleteDepartment(@PathVariable String departmentId) {
+    public ResponseEntity deleteDepartment(@PathVariable String departmentId)
+            throws NotFoundException, IllegalArgumentException {
         departmentService.deleteDepartment(departmentId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/departments")
     @ApiOperation("Create department")
-    public ResponseEntity createDepartment(@RequestBody Department department){
+    public ResponseEntity createDepartment(@RequestBody Department department)
+            throws IllegalArgumentException {
+        if (department == null) {
+            throw new IllegalArgumentException("Illegal argument");
+        }
         departmentService.createDepartment(department);
         return new ResponseEntity(HttpStatus.CREATED);
     }

@@ -23,8 +23,8 @@ public class Main {
         final EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
 
         //Один департамент
-        Department department = departmentService.getOneDepartment("4028b88177fedf890177fee388500000");
-        System.out.println(department);
+//        Department department = departmentService.getOneDepartment("4028b88177fedf890177fee388500000");
+//        System.out.println(department);
 
         //один работник
 //        final Employee oneEmployee = employeeService.getOneEmployee("4028e49e776ea47d01776ea47f6c0001");
