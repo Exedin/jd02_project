@@ -52,7 +52,7 @@ public class DepartmentTest extends BaseTest {
             //do some work
 //            session.save(employee);
 //            session.save(employee1);
-            session.persist(department);
+            save=session.save(department);
             tx.commit();
 
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class DepartmentTest extends BaseTest {
         } finally {
             session.close();
         }
-//        assertNotNull(save);
+        assertNotNull(save);
     }
 
     @Test

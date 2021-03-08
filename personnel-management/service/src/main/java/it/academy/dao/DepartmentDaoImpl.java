@@ -34,21 +34,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department getOneDepartment(String id) {
+        if (id ==null){
+            //TODO новый эксепшен мессадж "Вы ввели null"
+        }
         Department department = sessionFactory.openSession().get(Department.class, id);
+        if (department==null){
+            //TODO новый эксепшен мессадж "Вы ввели некорретный айди"
+        }
         return department;
     }
 
 
-    //    @Override
-//    public String createDepartment(Department department) {
-//        Session session = sessionFactory
-//                .openSession();
-//        final Transaction transaction = session.beginTransaction();
-//        String id = (String) session
-//                .save(department);
-//        transaction.commit();
-//        return id;
-//    }
     @Override
     public String createDepartment(Department department) {
         Serializable save = sessionFactory.getCurrentSession().save(department);
@@ -66,30 +62,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
         sessionFactory.getCurrentSession().delete(department);
 
     }
-//    @Override
-//    public void deleteDepartment(String id) {
-//        final Session session = sessionFactory.openSession();
-//        final List<Department> departments =
-//                session.createQuery("from Department where id='"+id+"'", Department.class)
-//                        .list();
-//        System.out.println(departments);
-//        Department department = departments.get(0);
-//        Transaction tx = null;
-//        try {
-//            tx = session.beginTransaction();
-//            //do some work
-//            final List<Employee> employeeList = department.getEmployeeList();
-//            employeeList.stream().forEach(employee -> employee.setDepartment(null));
-//            session.delete(department);
-//            tx.commit();
-//
-//        } catch (Exception e) {
-//            if (tx != null) tx.rollback();
-//            throw e;
-//        } finally {
-//            session.close();
-//        }
-//
-//    }
+
 
 }
