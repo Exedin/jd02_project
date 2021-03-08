@@ -2,10 +2,9 @@ package it.academy.service;
 
 import it.academy.BaseTest;
 import it.academy.dao.DaoConfiguration;
-import it.academy.exception.IllegalArgumentException;
-import it.academy.exception.NotFoundException;
+import it.academy.exception.MyIllegalArgumentException;
+import it.academy.exception.MyNotFoundException;
 import it.academy.model.Department;
-import it.academy.service.DepartmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +24,32 @@ public class DepartmentServiceTest extends BaseTest {
     DepartmentService departmentService;
 
     @org.junit.Test
-    public void getOneDepartment() throws NotFoundException, IllegalArgumentException {
+    public void getOneDepartment() throws MyNotFoundException, MyIllegalArgumentException {
         cleanInsert("DepartmentTest.xml");
         Department oneDepartment = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f770001");
         assertEquals("test1", oneDepartment.getName());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void getOneDepartmentWithBadId() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyNotFoundException.class)
+    public void getOneDepartmentWithBadId() throws MyNotFoundException, MyIllegalArgumentException {
         cleanInsert("DepartmentTest.xml");
         Department oneDepartment = departmentService.getOneDepartment("4028e49e776ea47d01776ea47f7700011");
 
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void getOneDepartmentWithNull() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyIllegalArgumentException.class)
+    public void getOneDepartmentWithNull() throws MyNotFoundException, MyIllegalArgumentException {
         cleanInsert("DepartmentTest.xml");
         Department oneDepartment = departmentService.getOneDepartment(null);
 
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void getOneDepartmentWithEmptyArgs() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyIllegalArgumentException.class)
+    public void getOneDepartmentWithEmptyArgs() throws MyNotFoundException, MyIllegalArgumentException {
         cleanInsert("DepartmentTest.xml");
         Department oneDepartment = departmentService.getOneDepartment("");
 
     }
     @org.junit.Test
-    public void getAllDepartment() throws NotFoundException, IllegalArgumentException {
+    public void getAllDepartment() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
         cleanInsert("DepartmentTest.xml");
         //When
@@ -59,8 +58,8 @@ public class DepartmentServiceTest extends BaseTest {
         assertEquals(2, allDepartment.size());
         assertEquals("test2", allDepartment.get(1).getName());
     }
-    @Test(expected = NotFoundException.class)
-    public void getAllDepartmentEmptyBase() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyNotFoundException.class)
+    public void getAllDepartmentEmptyBase() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
         departmentService.deleteDepartment("4028e49e776ea47d01776ea47f770001");
         departmentService.deleteDepartment("4028e49e776ea47d01776ea47f770002");
@@ -70,7 +69,7 @@ public class DepartmentServiceTest extends BaseTest {
 
     }
     @org.junit.Test
-    public void deleteDepartment() throws NotFoundException, IllegalArgumentException {
+    public void deleteDepartment() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
         cleanInsert("DepartmentTest.xml");
         //When
@@ -80,23 +79,23 @@ public class DepartmentServiceTest extends BaseTest {
         assertEquals(1, allDepartment.size());
         assertEquals("test2", allDepartment.get(0).getName());
     }
-    @Test(expected = NotFoundException.class)
-    public void deleteDepartmentWithBadId() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyNotFoundException.class)
+    public void deleteDepartmentWithBadId() throws MyNotFoundException, MyIllegalArgumentException {
         //When
         departmentService.deleteDepartment("4028e49e776ea47d01776ea47f770551");
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void deleteDepartmentWithNull() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyIllegalArgumentException.class)
+    public void deleteDepartmentWithNull() throws MyNotFoundException, MyIllegalArgumentException {
         //When
         departmentService.deleteDepartment(null);
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void deleteDepartmentEmptyArgs() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyIllegalArgumentException.class)
+    public void deleteDepartmentEmptyArgs() throws MyNotFoundException, MyIllegalArgumentException {
         //When
         departmentService.deleteDepartment("");
     }
     @org.junit.Test
-    public void createDepartment() throws NotFoundException, IllegalArgumentException {
+    public void createDepartment() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
         cleanInsert("DepartmentTest.xml");
         //When
@@ -106,8 +105,8 @@ public class DepartmentServiceTest extends BaseTest {
         List<Department> allDepartment = departmentService.getAllDepartment();
         assertEquals(3, allDepartment.size());
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void createDepartmentWithNull() throws NotFoundException, IllegalArgumentException {
+    @Test(expected = MyIllegalArgumentException.class)
+    public void createDepartmentWithNull() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
         cleanInsert("DepartmentTest.xml");
         //When

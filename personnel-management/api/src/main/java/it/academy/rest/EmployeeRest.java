@@ -1,8 +1,8 @@
 package it.academy.rest;
 
 import io.swagger.annotations.ApiOperation;
-import it.academy.exception.IllegalArgumentException;
-import it.academy.exception.NotFoundException;
+import it.academy.exception.MyIllegalArgumentException;
+import it.academy.exception.MyNotFoundException;
 import it.academy.model.Employee;
 import it.academy.response.ErrorResponse;
 import it.academy.service.EmployeeService;
@@ -22,7 +22,7 @@ public class EmployeeRest {
     @GetMapping("/employees/{employeeId}")
     @ApiOperation("Read one employee")
     public ResponseEntity readOneEmployee (@PathVariable String employeeId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         final Employee oneEmployee = employeeService.getOneEmployee(employeeId);
         return new ResponseEntity (oneEmployee, HttpStatus.OK);
     }
@@ -30,7 +30,7 @@ public class EmployeeRest {
     @GetMapping("/employees")
     @ApiOperation("Read all employees without department")
     public ResponseEntity<List<Employee>> readAllEmployeeWithoutDepartment()
-            throws NotFoundException {
+            throws MyNotFoundException {
         List<Employee> employees = employeeService.getAllEmployeeWithoutDepartment();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class EmployeeRest {
     @DeleteMapping("/employees/department_remove/{employeeId}")
     @ApiOperation("Remove one employee from department")
     public ResponseEntity deleteEmployeeFromDepartment(@PathVariable String employeeId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         employeeService.removeEmployeeFromDepartment(employeeId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -46,7 +46,7 @@ public class EmployeeRest {
     @DeleteMapping("/employees/{employeeId}")
     @ApiOperation("Remove one employee")
     public ResponseEntity deleteEmployee(@PathVariable String employeeId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         employeeService.deleteEmployee(employeeId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -54,10 +54,7 @@ public class EmployeeRest {
     @PostMapping("/employees")
     @ApiOperation("Create employee")
     public ResponseEntity createEmployee(@RequestBody Employee employee)
-            throws IllegalArgumentException {
-        if (employee == null) {
-            throw new IllegalArgumentException("Illegal argument");
-        }
+            throws MyIllegalArgumentException {
         employeeService.createEmployee(employee);
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -66,13 +63,13 @@ public class EmployeeRest {
     @PutMapping("/employees")
     @ApiOperation("Add employee to department")
     public ResponseEntity addEmployeeToDepartment(String employeeId, String departmentId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         employeeService.addEmployeeToDepartment(employeeId, departmentId);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @ExceptionHandler
-    public ResponseEntity handleException (IllegalArgumentException exc){
+    public ResponseEntity handleException (MyIllegalArgumentException exc){
         ErrorResponse errorResponse=new ErrorResponse();
 
         errorResponse.setMessage(exc.getMessage());
@@ -82,7 +79,7 @@ public class EmployeeRest {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleException (NotFoundException exc){
+    public ResponseEntity handleException (MyNotFoundException exc){
         ErrorResponse errorResponse=new ErrorResponse();
 
         errorResponse.setMessage(exc.getMessage());

@@ -2,8 +2,9 @@ package it.academy.service;
 
 import it.academy.dao.DepartmentDao;
 import it.academy.dao.EmployeeDao;
-import it.academy.exception.*;
-import it.academy.exception.IllegalArgumentException;
+
+import it.academy.exception.MyIllegalArgumentException;
+import it.academy.exception.MyNotFoundException;
 import it.academy.model.Department;
 import it.academy.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,68 +24,67 @@ public class EmployeeService {
 
 
     @Transactional
-    public Employee getOneEmployee(String id) throws NotFoundException, IllegalArgumentException {
+    public Employee getOneEmployee(String id) throws MyIllegalArgumentException, MyNotFoundException {
         Employee employee = employeeDaoImpl.getOneEmployee(id);
         if(id==null||id==""){
-            throw new IllegalArgumentException("Illegal argument");
+            throw new MyIllegalArgumentException("Illegal argument");
         }
         if (employee==null){
-            throw new NotFoundException("Employee with that id doesn't exist");
+            throw new MyNotFoundException("Employee with that id doesn't exist");
         }
         return employee;
     }
 
     @Transactional
-    public String createEmployee (Employee employee){
+    public String createEmployee (Employee employee) throws MyIllegalArgumentException {
+        if (employee == null) {
+            throw new MyIllegalArgumentException("Illegal argument");
+        }
         String save = employeeDaoImpl.createEmployee(employee);
         return save;
     }
 
 
     @Transactional
-    public void deleteEmployee (String id) throws NotFoundException, IllegalArgumentException {
+    public void deleteEmployee (String id) throws MyNotFoundException, MyIllegalArgumentException {
         if(id==null||id==""){
-            throw new IllegalArgumentException("Illegal argument");
+            throw new MyIllegalArgumentException("Illegal argument");
         }
         Employee oneEmployee = getOneEmployee(id);
         if (oneEmployee==null){
-            throw new NotFoundException("Employee with that id doesn't exist");
+            throw new MyNotFoundException("Employee with that id doesn't exist");
         }
         employeeDaoImpl.delete(id);
     }
 
     @Transactional
     public void addEmployeeToDepartment(String employeeId, String departmentId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         Employee oneEmployee = getOneEmployee(employeeId);
         Department oneDepartment = departmentDao.getOneDepartment(departmentId);
-        if (oneDepartment==null){
-            throw new NotFoundException("Department with that id doesn't exist");
-        }
         employeeDaoImpl.addEmployeeToDepartment(oneEmployee, oneDepartment);
-
     }
 
     @Transactional
-    public void removeEmployeeFromDepartment(String id) throws NotFoundException, IllegalArgumentException {
+    public void removeEmployeeFromDepartment(String id) throws MyNotFoundException, MyIllegalArgumentException {
         if(id==null||id==""){
-            throw new IllegalArgumentException("Illegal argument");
+            throw new MyIllegalArgumentException("Illegal argument");
         }
         Employee oneEmployee = getOneEmployee(id);
         if (oneEmployee==null){
-            throw new NotFoundException("Employee with that id doesn't exist");
+            throw new MyNotFoundException("Employee with that id doesn't exist");
         }
         if (oneEmployee.getDepartment()==null){
-            throw new NotFoundException("Employee doesn't have a department");
+            throw new MyNotFoundException("Employee doesn't have a department");
         }
         employeeDaoImpl.removeEmployeeFromDepartment(id);
     }
 
     @Transactional
-    public List<Employee> getAllEmployeeWithoutDepartment() throws NotFoundException {
+    public List<Employee> getAllEmployeeWithoutDepartment() throws MyNotFoundException {
         List<Employee> allEmployeeWithoutDepartment = employeeDaoImpl.getAllEmployeeWithoutDepartment();
-        if (allEmployeeWithoutDepartment==null){
-            throw new NotFoundException("Employees without department don't exist");
+        if (allEmployeeWithoutDepartment.isEmpty()){
+            throw new MyNotFoundException("Employees without department don't exist");
         }
         return allEmployeeWithoutDepartment;
     }

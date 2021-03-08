@@ -1,8 +1,8 @@
 package it.academy.rest;
 
 import io.swagger.annotations.ApiOperation;
-import it.academy.exception.IllegalArgumentException;
-import it.academy.exception.NotFoundException;
+import it.academy.exception.MyIllegalArgumentException;
+import it.academy.exception.MyNotFoundException;
 import it.academy.model.Department;
 import it.academy.response.ErrorResponse;
 import it.academy.service.DepartmentService;
@@ -22,13 +22,13 @@ public class DepartmentRest {
     @GetMapping("/departments/{departmentId}")
     @ApiOperation("Read one department")
     public ResponseEntity<Department> readDepartment(@PathVariable String departmentId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         final Department oneDepartment = departmentService.getOneDepartment(departmentId);
         return new ResponseEntity<>(oneDepartment, HttpStatus.OK);
     }
     @GetMapping("/departments")
     @ApiOperation("Read all departments")
-    public ResponseEntity<List<Department>> readAllDepartment() throws NotFoundException {
+    public ResponseEntity<List<Department>> readAllDepartment() throws MyNotFoundException {
         List<Department> allDepartment = departmentService.getAllDepartment();
         return new ResponseEntity<>(allDepartment, HttpStatus.OK);
     }
@@ -36,7 +36,7 @@ public class DepartmentRest {
     @DeleteMapping("/departments/{departmentId}")
     @ApiOperation("Delete one department")
     public ResponseEntity deleteDepartment(@PathVariable String departmentId)
-            throws NotFoundException, IllegalArgumentException {
+            throws MyNotFoundException, MyIllegalArgumentException {
         departmentService.deleteDepartment(departmentId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -44,12 +44,12 @@ public class DepartmentRest {
     @PostMapping("/departments")
     @ApiOperation("Create department")
     public ResponseEntity createDepartment(@RequestBody Department department)
-            throws IllegalArgumentException {
+            throws MyIllegalArgumentException {
         departmentService.createDepartment(department);
         return new ResponseEntity(HttpStatus.CREATED);
     }
     @ExceptionHandler
-    public ResponseEntity handleException (IllegalArgumentException exc){
+    public ResponseEntity handleException (MyIllegalArgumentException exc){
         ErrorResponse errorResponse=new ErrorResponse();
 
         errorResponse.setMessage(exc.getMessage());
@@ -59,7 +59,7 @@ public class DepartmentRest {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleException (NotFoundException exc){
+    public ResponseEntity handleException (MyNotFoundException exc){
         ErrorResponse errorResponse=new ErrorResponse();
 
         errorResponse.setMessage(exc.getMessage());
