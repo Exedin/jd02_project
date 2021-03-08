@@ -31,9 +31,7 @@ public class DepartmentTest extends BaseTest {
         final Serializable save;
         try {
             tx = session.beginTransaction();
-            //do some work
-//            session.save(employee);
-//            session.save(employee1);
+
             save=session.save(department);
             tx.commit();
 

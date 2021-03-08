@@ -64,14 +64,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
-//    @Override
-//    public void addEmployeeToDepartment(String employeeId, String departmentId) {
-//        Department oneDepartment = departmentDaoImpl.getOneDepartment(departmentId);
-//        Employee employee=sessionFactory.getCurrentSession().get(Employee.class, employeeId);
-//        employee.setDepartment(oneDepartment);
-//        sessionFactory.getCurrentSession().saveOrUpdate(employee);
-//
-//    }
     @Override
     public void addEmployeeToDepartment(Employee employee, Department department) {
         employee.setDepartment(department);
