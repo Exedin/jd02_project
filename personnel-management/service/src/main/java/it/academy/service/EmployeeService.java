@@ -58,6 +58,9 @@ public class EmployeeService {
             throws NotFoundException, IllegalArgumentException {
         Employee oneEmployee = getOneEmployee(employeeId);
         Department oneDepartment = departmentDao.getOneDepartment(departmentId);
+        if (oneDepartment==null){
+            throw new NotFoundException("Department with that id doesn't exist");
+        }
         employeeDaoImpl.addEmployeeToDepartment(oneEmployee, oneDepartment);
 
     }
