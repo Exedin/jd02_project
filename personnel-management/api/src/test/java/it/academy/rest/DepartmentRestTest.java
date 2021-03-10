@@ -1,6 +1,7 @@
 package it.academy.rest;
 
 import it.academy.RestTestConfiguration;
+import it.academy.exception.MyNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class DepartmentRestTest {
     }
 
     @Test
-    public void readDepartment() throws Exception {
+    public void readAllDepartment() throws Exception {
         final MvcResult mvcResult = mockMvc
                 .perform(get("/departments")).andReturn();
 
@@ -53,6 +54,28 @@ public class DepartmentRestTest {
         System.out.println(mvcResult.getResponse().getStatus());
         System.out.println("==========================================================");
         assertEquals(200, mvcResult.getResponse().getStatus());
-
     }
+
+    @Test
+    public void readDepartment() throws Exception {
+        final MvcResult mvcResult = mockMvc
+                .perform(get("/departments/1")).andReturn();
+
+        System.out.println("==========================================================");
+        System.out.println(mvcResult.getResponse().getContentAsString());
+        System.out.println("==========================================================");
+        assertEquals(200, mvcResult.getResponse().getStatus());
+
+        final MvcResult mvcResult1 = mockMvc
+                .perform(get("/departments/2")).andReturn();
+    }
+    @Test
+    public void readDepartmentWithBadId() throws Exception {
+        final MvcResult mvcResult = mockMvc
+                .perform(get("/departments/2")).andReturn();
+        assertEquals(404, mvcResult.getResponse().getStatus());
+    }
+
+
+
 }
