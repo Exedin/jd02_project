@@ -1,6 +1,7 @@
 package it.academy.service;
 
 import it.academy.BaseTest;
+import it.academy.DaoTestConfiguration;
 import it.academy.dao.DaoConfiguration;
 import it.academy.exception.MyIllegalArgumentException;
 import it.academy.exception.MyNotFoundException;
@@ -16,7 +17,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DaoConfiguration.class)
+@ContextConfiguration(classes = DaoTestConfiguration.class)
 public class DepartmentServiceTest extends BaseTest {
 
 

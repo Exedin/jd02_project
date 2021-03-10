@@ -30,7 +30,7 @@ public class DaoTestConfiguration {
     @Autowired
     Environment env;
 
-    @Bean
+    @Bean(name = "testDataSource")
     public DataSource dataSource(){
         BasicDataSource dataSource= new BasicDataSource();
         dataSource.setUrl(env.getProperty("datasource.url"));
@@ -42,7 +42,7 @@ public class DaoTestConfiguration {
         return dataSource;
     }
 
-    @Bean
+    @Bean(name = "testSessionFactory")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactoryBean
                 = new LocalSessionFactoryBean();

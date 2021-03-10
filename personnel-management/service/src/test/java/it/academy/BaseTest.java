@@ -10,7 +10,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,30 +30,33 @@ public abstract class BaseTest {
     private IDatabaseConnection connection;
     private IDataSet dataSet;
 
+    @Autowired
+            @Qualifier("testSessionFactory")
     SessionFactory factory;
 
-    @org.junit.Before
-    public void setUp() {
-        StandardServiceRegistry registry =
-                new StandardServiceRegistryBuilder()
-                        .configure("hibernate.cfg.test.xml")
-                        .build();
-        factory = new MetadataSources(registry)
-                .buildMetadata()
-                .buildSessionFactory();
-    }
+//    @org.junit.Before
+//    public void setUp() {
+//        StandardServiceRegistry registry =
+//                new StandardServiceRegistryBuilder()
+//                        .configure("hibernate.cfg.test.xml")
+//                        .build();
+//        factory = new MetadataSources(registry)
+//                .buildMetadata()
+//                .buildSessionFactory();
+//    }
 
-    @org.junit.After
-    public void tearDown() {
-        factory.close();
-    }
-
-
+//    @org.junit.After
+//    public void tearDown() {
+//        factory.close();
+//    }
+    @Autowired
+        @Qualifier("testDataSource")
+    DataSource dataSource;
     public void cleanInsert(String resourceName) {
         try {
             if (connection == null) {
                 connection = new MySqlConnection(
-                        MySqlDataSource.getTestConnection(),
+                        dataSource.getConnection(),
                         "personnel_management_test");
             }
             dataSet = new FlatXmlDataSetBuilder()
@@ -72,26 +79,26 @@ public abstract class BaseTest {
     }
 }
 
-class MySqlDataSource {
+//class MySqlDataSource {
+//
+//    private final static Logger log = Logger.getLogger(MySqlDataSource.class.getName());
+//    private static Properties properties = new Properties();
+//
+//    static {
+//        try {
+//            properties.load(MySqlDataSource.class
+//                    .getResourceAsStream("/personnel_management.ds.properties"));
+//            Class.forName(properties.getProperty("jdbc.drivers"));
+//        } catch (ClassNotFoundException | IOException e) {
+//            log.log(Level.SEVERE, e.getMessage(), e);
+//        }
+//    }
+//
+//    public static Connection getTestConnection() throws SQLException {
+//        return DriverManager.getConnection(
+//                properties.getProperty("url"),
+//                properties
+//        );
+//    }
 
-    private final static Logger log = Logger.getLogger(MySqlDataSource.class.getName());
-    private static Properties properties = new Properties();
-
-    static {
-        try {
-            properties.load(MySqlDataSource.class
-                    .getResourceAsStream("/personnel_management.ds.properties"));
-            Class.forName(properties.getProperty("jdbc.drivers"));
-        } catch (ClassNotFoundException | IOException e) {
-            log.log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
-    public static Connection getTestConnection() throws SQLException {
-        return DriverManager.getConnection(
-                properties.getProperty("url"),
-                properties
-        );
-    }
-
-}
+//}

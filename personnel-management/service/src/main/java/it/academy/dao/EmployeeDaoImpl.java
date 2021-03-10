@@ -27,7 +27,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployeeWithoutDepartment() {
         List<Employee> employees = sessionFactory
-                .openSession()
+                .getCurrentSession()
                 .createQuery("from Employee where D_ID is null", Employee.class)
                 .list();
 

@@ -6,7 +6,8 @@ import it.academy.model.Department;
 import it.academy.model.Employee;
 import it.academy.model.EmployeeFullName;
 import org.apache.commons.dbcp2.BasicDataSource;
-
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,7 @@ public class DaoConfiguration {
     @Autowired
     Environment env;
 
-    @Bean
+        @Bean
     public DataSource dataSource(){
         BasicDataSource dataSource= new BasicDataSource();
         dataSource.setUrl(env.getProperty("datasource.url"));
@@ -43,6 +44,16 @@ public class DaoConfiguration {
         dataSource.setMaxTotal(30);
         return dataSource;
     }
+//    @Bean
+//    public DataSource dataSource() {
+//        HikariConfig hikariConfig = new HikariConfig();
+//        hikariConfig.setJdbcUrl(env.getProperty("datasource.url"));
+//        hikariConfig.setDriverClassName(Driver.class.getName());
+//        hikariConfig.setUsername(env.getProperty("datasource.username"));
+//        hikariConfig.setPassword(env.getProperty("datasource.password"));
+//        hikariConfig.setMaximumPoolSize(100);
+//        return new HikariDataSource(hikariConfig);
+//    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
@@ -60,6 +71,7 @@ public class DaoConfiguration {
         sessionFactoryBean.setHibernateProperties(properties);
         return sessionFactoryBean;
     }
+
     @Bean
     public PlatformTransactionManager transactionManager(
             SessionFactory sessionFactory) {
