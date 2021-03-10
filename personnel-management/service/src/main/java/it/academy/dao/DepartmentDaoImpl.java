@@ -34,7 +34,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department getOneDepartment(String id) {
-        Department department = sessionFactory.openSession().get(Department.class, id);
+        Department department = sessionFactory.getCurrentSession().get(Department.class, id);
         return department;
     }
 

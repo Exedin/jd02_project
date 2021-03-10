@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 @ContextConfiguration(classes = RestTestConfiguration.class)
@@ -45,10 +46,13 @@ public class DepartmentRestTest {
 
     @Test
     public void readDepartment() throws Exception {
-        mockMvc
-                .perform(put("/visitor_count")).andReturn();
+        final MvcResult mvcResult = mockMvc
+                .perform(get("/departments")).andReturn();
 
         System.out.println("==========================================================");
+        System.out.println(mvcResult.getResponse().getStatus());
+        System.out.println("==========================================================");
+        assertEquals(200, mvcResult.getResponse().getStatus());
 
     }
 }
