@@ -38,7 +38,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department;
     }
 
-
     @Override
     public String createDepartment(Department department) {
         Serializable save = sessionFactory.getCurrentSession().save(department);
