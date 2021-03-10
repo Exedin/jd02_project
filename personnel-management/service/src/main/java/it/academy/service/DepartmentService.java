@@ -34,8 +34,8 @@ public class DepartmentService {
     @Transactional(readOnly = true)
     public List<Department> getAllDepartment() throws MyNotFoundException {
         List<Department> allDepartment = departmentDao.getAllDepartment();
-        if (allDepartment==null){
-            throw new MyNotFoundException("Department with that id doesn't exist");
+        if (allDepartment.size()==0){
+            throw new MyNotFoundException("Any department doesn't exist");
         }
         return allDepartment;
     }

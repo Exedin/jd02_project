@@ -33,27 +33,27 @@ public class DaoConfiguration {
     @Autowired
     Environment env;
 
-        @Bean
-    public DataSource dataSource(){
-        BasicDataSource dataSource= new BasicDataSource();
-        dataSource.setUrl(env.getProperty("datasource.url"));
-        dataSource.setDriverClassName(Driver.class.getName());
-        dataSource.setUsername(env.getProperty("datasource.username"));
-        dataSource.setPassword(env.getProperty("datasource.password"));
-        dataSource.setInitialSize(20);
-        dataSource.setMaxTotal(30);
-        return dataSource;
-    }
-//    @Bean
-//    public DataSource dataSource() {
-//        HikariConfig hikariConfig = new HikariConfig();
-//        hikariConfig.setJdbcUrl(env.getProperty("datasource.url"));
-//        hikariConfig.setDriverClassName(Driver.class.getName());
-//        hikariConfig.setUsername(env.getProperty("datasource.username"));
-//        hikariConfig.setPassword(env.getProperty("datasource.password"));
-//        hikariConfig.setMaximumPoolSize(100);
-//        return new HikariDataSource(hikariConfig);
+//        @Bean
+//    public DataSource dataSource(){
+//        BasicDataSource dataSource= new BasicDataSource();
+//        dataSource.setUrl(env.getProperty("datasource.url"));
+//        dataSource.setDriverClassName(Driver.class.getName());
+//        dataSource.setUsername(env.getProperty("datasource.username"));
+//        dataSource.setPassword(env.getProperty("datasource.password"));
+//        dataSource.setInitialSize(20);
+//        dataSource.setMaxTotal(30);
+//        return dataSource;
 //    }
+    @Bean
+    public DataSource dataSource() {
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setJdbcUrl(env.getProperty("datasource.url"));
+        hikariConfig.setDriverClassName(Driver.class.getName());
+        hikariConfig.setUsername(env.getProperty("datasource.username"));
+        hikariConfig.setPassword(env.getProperty("datasource.password"));
+        hikariConfig.setMaximumPoolSize(100);
+        return new HikariDataSource(hikariConfig);
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {

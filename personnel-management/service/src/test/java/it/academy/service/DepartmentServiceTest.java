@@ -62,11 +62,13 @@ public class DepartmentServiceTest extends BaseTest {
     @Test(expected = MyNotFoundException.class)
     public void getAllDepartmentEmptyBase() throws MyNotFoundException, MyIllegalArgumentException {
         //Given
+        cleanInsert("DepartmentTest.xml");
         departmentService.deleteDepartment("4028e49e776ea47d01776ea47f770001");
         departmentService.deleteDepartment("4028e49e776ea47d01776ea47f770002");
         //When
         final List<Department> allDepartment = departmentService.getAllDepartment();
         //Then
+        System.out.println(allDepartment);
 
     }
     @org.junit.Test
