@@ -55,7 +55,7 @@ public class DepartmentRest {
         errorResponse.setMessage(exc.getMessage());
         errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         errorResponse.setTimeStamp(System.currentTimeMillis());
-        return new ResponseEntity(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler

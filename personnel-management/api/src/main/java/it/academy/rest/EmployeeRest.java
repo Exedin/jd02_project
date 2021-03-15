@@ -40,7 +40,7 @@ public class EmployeeRest {
     public ResponseEntity deleteEmployeeFromDepartment(@PathVariable String employeeId)
             throws MyNotFoundException, MyIllegalArgumentException {
         employeeService.removeEmployeeFromDepartment(employeeId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(new ErrorResponse(), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/employees/{employeeId}")

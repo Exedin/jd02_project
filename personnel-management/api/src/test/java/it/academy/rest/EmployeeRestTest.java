@@ -1,15 +1,10 @@
 package it.academy.rest;
 
 import it.academy.RestTestConfiguration;
-import it.academy.exception.MyNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,21 +13,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.logging.Logger;
 
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @ContextConfiguration(classes = RestTestConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class DepartmentRestTest {
+public class EmployeeRestTest {
 
 
-    public static final Logger log = Logger.getLogger(DepartmentRestTest.class.getName());
+    public static final Logger log = Logger.getLogger(EmployeeRestTest.class.getName());
 
     @Autowired
     WebApplicationContext context;
@@ -45,12 +39,13 @@ public class DepartmentRestTest {
     }
 
     @Test
-    public void readAllDepartment() throws Exception {
+    public void readAllEmployeeWithoutDepartment() throws Exception {
         final MvcResult mvcResult = mockMvc
-                .perform(get("/departments")).andReturn();
+                .perform(get("/employees")).andReturn();
 
         System.out.println("==========================================================");
         System.out.println(mvcResult.getResponse().getStatus());
+        System.out.println(mvcResult.getResponse().getContentAsString());
         System.out.println("==========================================================");
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
@@ -74,12 +69,7 @@ public class DepartmentRestTest {
                 .perform(get("/departments/2")).andReturn();
         assertEquals(404, mvcResult.getResponse().getStatus());
     }
-    @Test
-    public void deleteDepartment() throws Exception {
-        final MvcResult mvcResult = mockMvc
-                .perform(delete("/departments/1")).andReturn();
-        assertEquals(204, mvcResult.getResponse().getStatus());
-    }
+
 
 
 }
