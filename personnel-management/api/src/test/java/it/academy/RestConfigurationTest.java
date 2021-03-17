@@ -33,6 +33,7 @@ public class RestConfigurationTest {
                 .thenReturn(new Department());
         Mockito.when(departmentService.getOneDepartment("2"))
                 .thenThrow(MyNotFoundException.class);
+
         Mockito.when(departmentService.getOneDepartment(null))
                 .thenThrow(MyIllegalArgumentException.class);
 
@@ -42,6 +43,11 @@ public class RestConfigurationTest {
         Mockito.when(departmentService.deleteDepartment( "2"))
                 .thenThrow(MyNotFoundException.class);
 
+
+        Mockito.when(departmentService.createDepartment(new Department()))
+                .thenReturn("1");
+        Mockito.when(departmentService.createDepartment(null))
+                .thenThrow(MyIllegalArgumentException.class);
 
 
 
@@ -75,6 +81,12 @@ public class RestConfigurationTest {
                 .thenThrow(MyNotFoundException.class);
         Mockito.when(employeeService.getOneEmployee(null))
                 .thenThrow(MyIllegalArgumentException.class);
+
+        Mockito.when(employeeService.addEmployeeToDepartment("1", "1"))
+                .thenReturn(true);
+        Mockito.when(employeeService.addEmployeeToDepartment("2", "2"))
+                .thenThrow(MyNotFoundException.class);
+
 
         return employeeService;
     }

@@ -1,11 +1,17 @@
 package it.academy.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import it.academy.RestConfigurationTest;
+import it.academy.model.Department;
+import it.academy.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -74,6 +80,41 @@ public class DepartmentRestTest {
         final MvcResult mvcResult = mockMvc
                 .perform(delete("/departments/1")).andReturn();
         assertEquals(204, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void deleteDepartmentBadId() throws Exception {
+        final MvcResult mvcResult = mockMvc
+                .perform(delete("/departments/2")).andReturn();
+        assertEquals(404, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void createDepartment() throws Exception {
+        ObjectMapper objectMapper= new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(new Department());
+
+        final MvcResult mvcResult = mockMvc
+                .perform(post("/departments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJson)
+                )
+                .andReturn();
+
+        assertEquals(201, mvcResult.getResponse().getStatus());
+    }
+
+
+    @Test
+    public void createDepartmentWithBadArgs() throws Exception {
+        final MvcResult mvcResult = mockMvc
+                .perform(post("/departments")
+                )
+                .andReturn();
+
+        assertEquals(400, mvcResult.getResponse().getStatus());
     }
 
 

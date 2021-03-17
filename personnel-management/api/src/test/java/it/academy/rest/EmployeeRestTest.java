@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import it.academy.RestConfigurationTest;
 import it.academy.model.Employee;
+import jdk.jfr.ContentType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
@@ -53,10 +55,6 @@ public class EmployeeRestTest {
         final MvcResult mvcResult = mockMvc
                 .perform(get("/employees")).andReturn();
 
-        System.out.println("==========================================================");
-        System.out.println(mvcResult.getResponse().getStatus());
-        System.out.println(mvcResult.getResponse().getContentAsString());
-        System.out.println("==========================================================");
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 
@@ -65,9 +63,6 @@ public class EmployeeRestTest {
         final MvcResult mvcResult = mockMvc
                 .perform(get("/employees/1")).andReturn();
 
-        System.out.println("==========================================================");
-        System.out.println(mvcResult.getResponse().getContentAsString());
-        System.out.println("==========================================================");
         assertEquals(200, mvcResult.getResponse().getStatus());
 
         final MvcResult mvcResult1 = mockMvc
@@ -106,9 +101,6 @@ public class EmployeeRestTest {
                 )
                 .andReturn();
 
-        System.out.println("==========================================================");
-        System.out.println(mvcResult.getResponse().getContentAsString());
-        System.out.println("==========================================================");
         assertEquals(201, mvcResult.getResponse().getStatus());
     }
     @Test
@@ -122,7 +114,6 @@ public class EmployeeRestTest {
 
         assertEquals(400, mvcResult.getResponse().getStatus());
     }
-
 
 
 }
