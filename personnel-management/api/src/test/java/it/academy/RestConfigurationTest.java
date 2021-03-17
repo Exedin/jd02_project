@@ -15,14 +15,14 @@ import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = "it.academy")
-//@Profile("test")
+@Profile("test")
 
 public class RestConfigurationTest {
 
     @Bean
     @Primary
     public DepartmentService departmentService() throws MyNotFoundException, MyIllegalArgumentException {
-        System.out.println("Call mock productService()");
+        System.out.println("Call mock departmentService()");
         DepartmentService departmentService =
                 Mockito.mock(DepartmentService.class);
 
@@ -50,7 +50,7 @@ public class RestConfigurationTest {
     @Bean
     @Primary
     public EmployeeService employeeService() throws MyNotFoundException, MyIllegalArgumentException {
-        System.out.println("Call mock productService()");
+        System.out.println("Call mock employeeService()");
         EmployeeService employeeService =
                 Mockito.mock(EmployeeService.class);
 
