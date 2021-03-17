@@ -1,15 +1,11 @@
 package it.academy.rest;
 
-import it.academy.RestTestConfiguration;
-import it.academy.exception.MyNotFoundException;
+import it.academy.RestConfigurationTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,14 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@ContextConfiguration(classes = RestTestConfiguration.class)
+@ContextConfiguration(classes = RestConfigurationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ActiveProfiles("test")

@@ -46,7 +46,7 @@ public class EmployeeService {
 
 
     @Transactional
-    public void deleteEmployee (String id) throws MyNotFoundException, MyIllegalArgumentException {
+    public boolean deleteEmployee (String id) throws MyNotFoundException, MyIllegalArgumentException {
         if(id==null||id==""){
             throw new MyIllegalArgumentException("Illegal argument");
         }
@@ -55,18 +55,20 @@ public class EmployeeService {
             throw new MyNotFoundException("Employee with that id doesn't exist");
         }
         employeeDaoImpl.delete(id);
+        return true;
     }
 
     @Transactional
-    public void addEmployeeToDepartment(String employeeId, String departmentId)
+    public boolean addEmployeeToDepartment(String employeeId, String departmentId)
             throws MyNotFoundException, MyIllegalArgumentException {
         Employee oneEmployee = getOneEmployee(employeeId);
         Department oneDepartment = departmentDao.getOneDepartment(departmentId);
         employeeDaoImpl.addEmployeeToDepartment(oneEmployee, oneDepartment);
+        return true;
     }
 
     @Transactional
-    public void removeEmployeeFromDepartment(String id) throws MyNotFoundException, MyIllegalArgumentException {
+    public boolean removeEmployeeFromDepartment(String id) throws MyNotFoundException, MyIllegalArgumentException {
         if(id==null||id==""){
             throw new MyIllegalArgumentException("Illegal argument");
         }
@@ -78,6 +80,7 @@ public class EmployeeService {
             throw new MyNotFoundException("Employee doesn't have a department");
         }
         employeeDaoImpl.removeEmployeeFromDepartment(id);
+        return true;
     }
 
     @Transactional

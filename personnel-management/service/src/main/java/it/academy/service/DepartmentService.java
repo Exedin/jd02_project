@@ -41,11 +41,12 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void deleteDepartment (String id) throws MyNotFoundException, MyIllegalArgumentException {
+    public boolean deleteDepartment (String id) throws MyNotFoundException, MyIllegalArgumentException {
         Department oneDepartment = getOneDepartment(id);
         oneDepartment.getEmployeeList().stream().
                 forEach(employee -> employeeDao.removeEmployeeFromDepartment(employee.getId()));
         departmentDao.deleteDepartment(id);
+        return true;
     }
 
     @Transactional

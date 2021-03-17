@@ -15,8 +15,9 @@ import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = "it.academy")
-@Profile("test")
-public class RestTestConfiguration {
+//@Profile("test")
+
+public class RestConfigurationTest {
 
     @Bean
     @Primary
@@ -34,8 +35,14 @@ public class RestTestConfiguration {
                 .thenThrow(MyNotFoundException.class);
         Mockito.when(departmentService.getOneDepartment(null))
                 .thenThrow(MyIllegalArgumentException.class);
-//
-//        Mockito.when(departmentService.deleteDepartment("1")).then();
+
+        Mockito.when(departmentService.deleteDepartment( "1"))
+                .thenReturn(true);
+
+        Mockito.when(departmentService.deleteDepartment( "2"))
+                .thenThrow(MyNotFoundException.class);
+
+
 
 
         return departmentService;
@@ -51,6 +58,24 @@ public class RestTestConfiguration {
                 .thenReturn(List.of(new Employee(), new Employee()));
         Mockito.when(employeeService.getAllEmployeeWithoutDepartment())
                 .thenReturn(List.of(new Employee(), new Employee()));
+
+        Mockito.when(employeeService.deleteEmployee("1"))
+                .thenReturn(true);
+        Mockito.when(employeeService.deleteEmployee("2"))
+                .thenThrow(MyNotFoundException.class);
+
+        Mockito.when(employeeService.createEmployee(new Employee()))
+                .thenReturn("1");
+        Mockito.when(employeeService.createEmployee(null))
+                .thenThrow(MyIllegalArgumentException.class);
+
+        Mockito.when(employeeService.getOneEmployee("1"))
+                .thenReturn(new Employee());
+        Mockito.when(employeeService.getOneEmployee("2"))
+                .thenThrow(MyNotFoundException.class);
+        Mockito.when(employeeService.getOneEmployee(null))
+                .thenThrow(MyIllegalArgumentException.class);
+
         return employeeService;
     }
 
